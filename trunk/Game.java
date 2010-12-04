@@ -1,5 +1,5 @@
 package krestnol;
-class Game{
+class Main{
     static public void main(String[]args){
         Kontroler kntr = new Kontroler();
     }
