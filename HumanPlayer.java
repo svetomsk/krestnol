@@ -1,9 +1,7 @@
 package krestnol;
-class HumanPlayer{
-    public String name;
+class HumanPlayer{    
     public String sign;
-    HumanPlayer(String nm, String sg){
-        name = nm;
-        sign = sg;
+    HumanPlayer(String sg){
+        sign = sg;       
     }
 }
