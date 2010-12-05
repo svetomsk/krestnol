@@ -2,11 +2,15 @@ package krestnol;
 import java.io.*;
 class Model{
     public boolean check = true;
-    public String [][] n = new String[3][3];
-    public void newg(){
-        for(int i = 0; i < 3; i++){
-            for(int g = 0; g < 3; g++){
-                n[i][g] = "3";
+    private int fieldX = 3;
+    private int fieldY = 3;
+    public String [][] field = new String[fieldX][fieldY];
+    public void newg(String [][] n){
+        int number = 1;
+        for(int i = 0; i < fieldX; i++){
+            for(int g = 0; g < fieldY; g++){
+                n[i][g] = Integer.toString(number);
+                number++;
             }
         }
     }
@@ -21,7 +25,7 @@ class Model{
     }
     public void readField(String n[][])throws IOException{
         BufferedReader readF = new BufferedReader(new FileReader("pole.txt"));
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < fieldX; i++){
             String[]read = readF.readLine().split(" ");
             System.arraycopy(read, 0, n[i], 0, 3);
         }
@@ -29,15 +33,15 @@ class Model{
     }
     public void writeField(String n[][])throws IOException{
         BufferedWriter writeF = new BufferedWriter(new FileWriter("pole.txt"));
-        for(int i = 0; i < 3; i++){
-            for(int g = 0; g < 3; g++){
+        for(int i = 0; i < fieldX; i++){
+            for(int g = 0; g < fieldY; g++){
                 writeF.write(n[i][g]+" ");
             }
             writeF.write("\r\n");
         }
         writeF.close();
     }    
-    public boolean mg(String n[][]){
+    public boolean checkField(String n[][]){
         boolean b=false;
         if(n[0][0].equals(n[1][1])&& n[1][1].equals(n[2][2])){
             b=true;
