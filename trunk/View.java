@@ -6,43 +6,19 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 class View{
-    Model mod = new Model();      
+    Model mod = new Model();    
     private JFrame pole, ask;
     private JTextField player1, player2;
     private JLabel result, nik1, nik2;
     public JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK;
     public JButton[] keys={key1, key2, key3, key4, key5, key6, key7, key8, key9};
-    private int i = 0;
-    String [][] mas = new String[3][3];
-   /* public void getNames(final HumanPlayer hp1,final HumanPlayer hp2){
-        ask = new JFrame("Имена игроков");
-        ask.setBounds(200,200,100,100);
-        ask.setLayout(new FlowLayout());
-        ask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        nik1 = new JLabel("1-st name: ");
-        nik2 = new JLabel("2-nd name: ");
-        player1 = new JTextField(7);
-        player2 = new JTextField(7);
-        OK = new JButton("OK");
-        OK.setPreferredSize(new Dimension(20,30));
-        OK.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent df){
-                hp1.name = player1.getText();
-                hp2.name = player2.getText();
-                ask.setVisible(false);
-            }
-        });
-        ask.add(nik1);
-        ask.add(player1);
-        ask.add(nik2);
-        ask.add(player2);
-        ask.add(OK);
-        ask.setVisible(true);
-    }*/
-    public void show(){
+    private int i = 0;    
+    public void show()throws IOException, InterruptedException{
+       mod.newg(mod.field);
+       mod.writeField(mod.field);
        result=new JLabel(" ");
        result.setForeground(Color.blue);
-       result.setPreferredSize(new Dimension(50,20));
+       result.setPreferredSize(new Dimension(60,20));
        pole=new JFrame("X vs. O");
        pole.setBackground(Color.red);
        pole.setLayout(new FlowLayout());
@@ -79,12 +55,18 @@ class View{
        });
        newn.addActionListener(new ActionListener(){
           public void actionPerformed(ActionEvent t){
-              mod.newg();
-              for(i=0;i<9;i++){
-                  keys[i].setEnabled(true);
-                  keys[i].setText(" ");
-              }
-              result.setText("Anyone");
+                try {
+                    mod.newg(mod.field);
+                    mod.writeField(mod.field);
+                    mod.check = true;
+                    for (i = 0; i < 9; i++) {
+                        keys[i].setEnabled(true);
+                        keys[i].setText(" ");
+                    }
+                    result.setText("Anyone");
+                } catch (IOException ex) {
+                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                }
           }
        });
        about.addActionListener(new ActionListener(){
@@ -119,278 +101,41 @@ class View{
 
        pole.add(result);
        pole.setVisible(true);
-       keys[0].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                try {                    
-                    mod.readField(mas);                    
-                    if (mod.mg(mas) != true) {                        
-                        if (mod.who() == true) {                            
-                            keys[0].setText("X");
-                            mas[0][0] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[0].setText("0");
-                            mas[0][0] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[0].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[1].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[1].setText("X");
-                            mas[0][1] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[1].setText("0");
-                            mas[0][1] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[1].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[2].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[2].setText("X");
-                            mas[0][2] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[2].setText("0");
-                            mas[0][2] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[2].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[3].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[3].setText("X");
-                            mas[1][0] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[3].setText("0");
-                            mas[1][0] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[3].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[4].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[4].setText("X");
-                            mas[1][1] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[4].setText("0");
-                            mas[1][1] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[4].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[5].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[5].setText("X");
-                            mas[1][2] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[0].setText("0");
-                            mas[1][2] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[5].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[6].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[6].setText("X");
-                            mas[2][0] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[6].setText("0");
-                            mas[2][0] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[6].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[7].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[7].setText("X");
-                            mas[2][1] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[7].setText("0");
-                            mas[2][1] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[7].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
-           keys[8].addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent t){
-                  try {
-                    mod.readField(mas);
-                    if (mod.mg(mas) != true) {
-                        if (mod.who() == true) {
-                            keys[8].setText("X");
-                            mas[2][2] = "1";
-                            if (mod.mg(mas) == true) {
-                                result.setText("X win");
-                            }
-                        } else {
-                            keys[8].setText("0");
-                            mas[2][2] = "0";
-                            if (mod.mg(mas) == true) {
-                                result.setText("O win");
-                            }
-                        }
-                        keys[8].setEnabled(false);
-                    }
-                    mod.writeField(mas);
-                } catch (IOException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
-           });
+       
    }
-   /* public void addListener(final JButton jbt, final int i,final int g)throws IOException{
-       mod.readField(mas);
-       if(mod.who() == true){
-           jbt.addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent t){
-                   if(mod.mg(mas)!=true){
-                       jbt.setText("X");
-                      mas[i][g] = "1";
-                      try {
-                        mod.writeField(mas);
-                      } catch (IOException ex) {
-                        Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                      }
-                      if(mod.mg(mas)==true){
-                            result.setText("X win");
-                        }                      
-                      jbt.setEnabled(false);   
-                   }
-               }
-           });
-           
-       }else if(mod.who()==false){
-           jbt.addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent s){
-                    jbt.setText("O");
-                      mas[i][g] = "0";
-                      try {
-                        mod.writeField(mas);
-                      } catch (IOException ex) {
-                        Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                      }
-                      if(mod.mg(mas)==true){
-                            result.setText("O win");
-                        }                      
-                      jbt.setEnabled(false); 
-               }
-           });
-        }
-    }*/
+    public void addListener(final JButton jbt, final int i,final int g, final String name1, final String name2)throws IOException{
+        mod.readField(mod.field);
+        jbt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                if(mod.checkField(mod.field)!=true){
+                    if(mod.who() == true){
+                        try {
+                            jbt.setText("X");
+                            mod.field[i][g] = "1";
+                            mod.writeField(mod.field);
+                            jbt.setEnabled(false);
+                            if (mod.checkField(mod.field) == true) {
+                                result.setText(name1 + " win");
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        try{
+                            jbt.setText("0");
+                            mod.field[i][g] = "0";
+                            mod.writeField(mod.field);
+                            jbt.setEnabled(false);
+                            if (mod.checkField(mod.field) == true) {
+                                result.setText(name2 + " win");
+                            }
+                        }
+                        catch(IOException ex1){
+                            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                    }
+                }
+            }
+       });
+    }
 }
