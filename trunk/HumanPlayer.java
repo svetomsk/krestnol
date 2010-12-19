@@ -1,5 +1,5 @@
 package krestnol;
-class HumanPlayer{    
+class HumanPlayer{
     private String sign;
     private String name;
 
