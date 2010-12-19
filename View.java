@@ -5,55 +5,70 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
-class View
+class View extends EventDispatcher
 {
-     Model mod;
-     public View(Model model){
-        mod = model;
-     }
-     private JFrame pole, ask;
-     private JTextField player1, player2;
-     private JLabel result, nik1, nik2;
+     Model mod; 
+     private JFrame pole;     
+     private JLabel result;
      public JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK;
      public JButton[] keys={key1, key2, key3, key4, key5, key6, key7, key8, key9};
-     private int i = 0;       
-     public void show()throws IOException, InterruptedException
+     JMenuItem about, newn, exit;
+     JMenuBar menu;
+     JMenu file, game, help;
+     private int i = 0;
+     int width = 3;
+     int height = 3;
+     int length = width*height;
+     
+     public View(final Model model)throws IOException, InterruptedException
      {
-        mod.writeField();
-        result=new JLabel(" ");
-        result.setForeground(Color.blue);
-        result.setPreferredSize(new Dimension(70,20));
-        pole=new JFrame("X vs. O");
-        pole.setBackground(Color.red);
-        pole.setLayout(new FlowLayout());
-        pole.setBounds(400,400,210,270);
-        pole.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        for(i=0;i<9;i++)
-        {
-            keys[i]=new JButton(" ");
-            keys[i].setBackground(Color.RED);
-            keys[i].setPreferredSize(new Dimension(50,50));
-            keys[i].setBackground(Color.BLUE);
-        }
+        mod = model;
+        createLabel();
+        createFrame();
+        createMenu();
+        addMenuListeners();
+        show();
+     }
+     
+     private void createLabel()
+     {         
+         result=new JLabel(" ");
+         result.setForeground(Color.blue);
+         result.setPreferredSize(new Dimension(70,20));
+     }
+     
+     private void createFrame()
+     {
+         pole=new JFrame("X vs. O");
+         pole.setBackground(Color.red);
+         pole.setLayout(new FlowLayout());
+         pole.setBounds(400,400,210,270);
+         pole.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     }
+     
+     private void createMenu()
+     {
+         menu=new JMenuBar();
+         menu.setBackground(Color.black);
 
-        JMenuBar menu=new JMenuBar();
-        menu.setBackground(Color.black);
+         file=new JMenu("Файл");
+         file.setForeground(Color.blue);
+         game=new JMenu("Игра");
+         game.setForeground(Color.blue);
+         help=new JMenu("Справка");
+         help.setForeground(Color.blue);
 
-        JMenu file=new JMenu("Файл");
-        file.setForeground(Color.blue);
-        JMenu game=new JMenu("Игра");
-        game.setForeground(Color.blue);
-        JMenu help=new JMenu("Справка");
-        help.setForeground(Color.blue);
-
-        JMenuItem exit=new JMenuItem("Выход");
-        exit.setBackground(Color.white);
-        JMenuItem newn=new JMenuItem("Новая");
-        newn.setBackground(Color.white);
-        JMenuItem about=new JMenuItem("Об игре..");
-        about.setBackground(Color.white);
-
-        exit.addActionListener(new ActionListener()
+         exit=new JMenuItem("Выход");
+         exit.setBackground(Color.white);
+         newn=new JMenuItem("Новая");
+         newn.setBackground(Color.white);
+         about=new JMenuItem("Об игре..");
+         about.setBackground(Color.white);
+     }
+     
+     private void addMenuListeners()
+     {
+         exit.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent y)
             {
@@ -96,15 +111,32 @@ class View
                p.setVisible(true);
            }
         });
+     }
+     
+     private void show()throws IOException, InterruptedException
+     {
+        mod.writeField();               
+        for(i=0;i<9;i++)
+        {
+            keys[i]=new JButton(" ");
+            keys[i].setBackground(Color.RED);
+            keys[i].setPreferredSize(new Dimension(50,50));
+            keys[i].setBackground(Color.BLUE);
+        }
+        menu=new JMenuBar();
+        menu.setBackground(Color.black);          
         file.add(exit);
         game.add(newn);
         help.add(about);
-
         menu.add(file);
         menu.add(game);
         menu.add(help);
-
         pole.add(menu);
+        for(i = 0; i <9; i++)
+        {
+            addButton(keys[i]);
+        }
+
         if(result.getText().equals(" "))
         {
             result.setText("Anyone");
@@ -113,58 +145,43 @@ class View
         {
             pole.add(keys[i]);
         }
-
         pole.add(result);
         pole.setVisible(true);
-       
-    }
 
-    public void addListener(final JButton jbt, final int i,final int g,
-            final HumanPlayer player1, final HumanPlayer player2)throws IOException
+    }
+    public void setResultText(String ResultText)
     {
-        mod.readField();
+        result.setText(ResultText + " " + "win");
+    }
+    public void setButtonText(String ButtonText, int x, int y)
+    {
+        keys[x*width+y].setText(ButtonText);
+        keys[x*width+y].setEnabled(false);
+    }
+    private void addButton(final JButton jbt)
+    {
         jbt.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent ae)
-            {
-                if(mod.checkField()!=true)
-                {
-                    if(mod.who() == true)
-                    {
-                        try
-                        {
-                            jbt.setText(player1.getSign());
-                            mod.setField(i, g, player1.getSign());
-                            mod.writeField();
-                            jbt.setEnabled(false);
-                            if (mod.checkField() == true)
-                            {
-                                result.setText(player1.getName() + " win");
-                            }
-                        } catch (IOException ex)
-                        {
-                            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }else
-                    {
-                        try
-                        {
-                            jbt.setText(player2.getSign());
-                            mod.setField(i, g, player2.getSign());
-                            mod.writeField();
-                            jbt.setEnabled(false);
-                            if (mod.checkField() == true)
-                            {
-                                result.setText(player2.getName()+ " win");
-                            }
-                        }
-                        catch(IOException ex1)
-                        {
-                            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex1);
-                        }
-                    }
-                }
-            }
-       });
+           public void actionPerformed(ActionEvent e)
+           {
+               dispatchEvent(getPos(jbt)[0], getPos(jbt)[1]);
+           }
+        });
     }
+    private int[] getPos(final JButton btn)
+    {
+        int [] results = new int[2];
+        width = 3;
+        height = 3;
+        length = width*height;
+        for(i = 0; i < length; i++)
+        {
+            if(btn.equals(keys[i]))
+            {
+                results[0] = i / width;
+                results[1] = i % width;
+            }
+        }        
+        return results;
+    }    
 }
