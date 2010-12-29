@@ -7,18 +7,18 @@ import java.awt.event.*;
 import java.io.*;
 class View extends EventDispatcher
 {
-     Model mod; 
+     private Model mod;
      private JFrame pole;     
      private JLabel result;
-     public JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK;
-     public JButton[] keys={key1, key2, key3, key4, key5, key6, key7, key8, key9};
-     JMenuItem about, newn, exit;
-     JMenuBar menu;
-     JMenu file, game, help;
+     private JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK;
+     private JButton[] keys={key1, key2, key3, key4, key5, key6, key7, key8, key9};
+     private JMenuItem about, newn, exit;
+     private JMenuBar menu;
+     private JMenu file, game, help;
      private int i = 0;
-     int width = 3;
-     int height = 3;
-     int length = width*height;
+     private int width = 3;
+     private int height = 3;
+     private int length = width*height;
      
      public View(final Model model)throws IOException, InterruptedException
      {
@@ -44,6 +44,7 @@ class View extends EventDispatcher
          pole.setLayout(new FlowLayout());
          pole.setBounds(400,400,210,270);
          pole.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         pole.setResizable(false);
      }
      
      private void createMenu()
@@ -83,7 +84,7 @@ class View extends EventDispatcher
                  {
                      mod = new Model();
                      mod.writeField();
-                     mod.check = true;
+                     mod.newcheck();
                      for (i = 0; i < 9; i++)
                      {
                          keys[i].setEnabled(true);
@@ -176,7 +177,7 @@ class View extends EventDispatcher
         length = width*height;
         for(i = 0; i < length; i++)
         {
-            if(btn.equals(keys[i]))
+            if(btn.equals(keys[i]))                            
             {
                 results[0] = i / width;
                 results[1] = i % width;

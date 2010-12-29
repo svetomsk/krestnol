@@ -2,16 +2,20 @@ package krestnol;
 import java.io.*;
 class Model
 {
-    public boolean check = true;
+    private boolean check = true;
     private int fieldX = 3;
     private int fieldY = 3;
     private String [][] field = new String[fieldX][fieldY];
-
+    private String [] checkF = new String[fieldX*fieldY];
     public Model()
     {
          newg();
     }
 
+    public void newcheck()
+    {
+        check = true;
+    }
     private void newg()
     {
         int number = 1;
@@ -55,6 +59,15 @@ class Model
             System.arraycopy(read, 0, field[i], 0, 3);
         }
         readF.close();
+        int t = 0;
+        for(int i = 0; i < fieldX; i++)
+        {
+            for(int g = 0; g < fieldY; g++)
+            {
+                checkF[t] = field[i][g];
+                t++;
+            }
+        }
     }
 
     public void writeField()throws IOException
@@ -66,44 +79,57 @@ class Model
             }
             writeF.write("\r\n");
         }
-        writeF.close();
+        writeF.close();        
+        int t = 0;
+        for(int i = 0; i < fieldX; i++)
+        {
+            for(int g = 0; g < fieldY; g++)
+            {
+                checkF[t] = field[i][g];
+                t++;
+            }
+        }
     }
 
     public boolean checkField()
     {
-        boolean b=false;
-        if(field[0][0].equals(field[1][1])&& field[1][1].equals(field[2][2]))
+        boolean result = false;
+        for(int i = 0; i < fieldX - 2; i++)
         {
-            b=true;
+            if(checkF[i].equals(checkF[i+3])&&checkF[i+3].equals(checkF[i+6]))
+            {
+                result = true;
+            }            
         }
-        else if(field[0][0].equals(field[1][0])&&field[1][0].equals(field[2][0]))
+
+        for(int i = 0; i <= fieldX%3;i++)
         {
-            b=true;
+            for(int g = i; g <= fieldY%3;g++)
+            {
+                if(checkF[g].equals(checkF[g+4])&&checkF[g+4].equals(checkF[g+8]))
+                {
+                    result = true;
+                }
+                if(checkF[g+2].equals(checkF[g+4])&&checkF[g+4].equals(checkF[g+6]))
+                {
+                    result = true;
+                }
+            }
+            for(int h = i; h < fieldX - 2; h++)
+            {
+                if(checkF[h].equals(checkF[h+3])&&checkF[h+3].equals(checkF[h+6]))
+                {
+                    result = true;
+                }
+            }
+            for(int h = i; h < fieldY; h+=3)
+            {
+                if(checkF[h].equals(checkF[h+1])&&checkF[h+1].equals(checkF[h+2]))
+                {
+                    result = true;
+                }
+            }
         }
-        else if(field[0][0].equals(field[0][1])&&field[0][1].equals(field[0][2]))
-        {
-            b=true;
-        }
-        else if(field[2][0].equals(field[2][1])&&field[2][1].equals(field[2][2]))
-        {
-            b=true;
-        }
-        else if(field[1][0].equals(field[1][1])&&field[1][1].equals(field[1][2]))
-        {
-            b=true;
-        }
-        else if(field[0][2].equals(field[1][1])&&field[1][1].equals(field[2][0]))
-        {
-            b=true;
-        }
-        else if(field[0][2].equals(field[1][2])&&field[1][2].equals(field[2][2]))
-        {
-            b=true;
-        }
-        else if(field[0][1].equals(field[1][1])&&field[1][1].equals(field[2][1]))
-        {
-            b=true;
-        }
-        return b;
+        return result;
     }
 }
