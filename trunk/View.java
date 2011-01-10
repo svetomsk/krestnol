@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.io.*;
 class View extends EventDispatcher
 {
+     private GetText text;
      private Model mod;
      private JFrame pole;     
      private JLabel result;
@@ -18,16 +19,17 @@ class View extends EventDispatcher
      private int i = 0;
      private int width = 3;
      private int height = 3;
-     private int length = width*height;
+     private int length = width*height; 
      
-     public View(final Model model)throws IOException, InterruptedException
-     {
-        mod = model;
-        createLabel();
-        createFrame();
-        createMenu();
-        addMenuListeners();
-        show();
+     public View(final Model model, final GetText txt/*, Kontroler knt*/)throws IOException, InterruptedException
+     {        
+         this.text = txt;
+         mod = model;         
+         createLabel();
+         createFrame();
+         createMenu();
+         addMenuListeners();
+         show();
      }
      
      private void createLabel()
@@ -39,7 +41,7 @@ class View extends EventDispatcher
      
      private void createFrame()
      {
-         pole=new JFrame("X vs. O");
+         pole=new JFrame(text.frameName());
          pole.setBackground(Color.red);
          pole.setLayout(new FlowLayout());
          pole.setBounds(400,400,210,270);
@@ -52,18 +54,18 @@ class View extends EventDispatcher
          menu=new JMenuBar();
          menu.setBackground(Color.black);
 
-         file=new JMenu("Файл");
+         file=new JMenu(text.fail());
          file.setForeground(Color.blue);
-         game=new JMenu("Игра");
+         game=new JMenu(text.igra());
          game.setForeground(Color.blue);
-         help=new JMenu("Справка");
+         help=new JMenu(text.spravke());
          help.setForeground(Color.blue);
 
-         exit=new JMenuItem("Выход");
+         exit=new JMenuItem(text.vyxod());
          exit.setBackground(Color.white);
-         newn=new JMenuItem("Новая");
+         newn=new JMenuItem(text.novaya());
          newn.setBackground(Color.white);
-         about=new JMenuItem("Об игре..");
+         about=new JMenuItem(text.obigre());
          about.setBackground(Color.white);
      }
      
@@ -77,20 +79,22 @@ class View extends EventDispatcher
             }
         });
         newn.addActionListener(new ActionListener()
-       {
+        {
+
            public void actionPerformed(ActionEvent t)
            {
+               mod = new Model();           
+               newModel();
+               mod.newcheck();
                  try
-                 {
-                     mod = new Model();
-                     mod.writeField();
-                     mod.newcheck();
+                 {                                
+                     mod.writeField();                     
                      for (i = 0; i < 9; i++)
                      {
                          keys[i].setEnabled(true);
                          keys[i].setText(" ");
                      }
-                     result.setText("Anyone");
+                     result.setText(text.anyone());
                  } catch (IOException ex) {
                      Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                  }
@@ -100,12 +104,10 @@ class View extends EventDispatcher
         {
            public void actionPerformed(ActionEvent t)
            {
-               JFrame p=new JFrame("Справка");
+               JFrame p=new JFrame(text.spravke());
                p.setBounds(400,410,130,120);
                p.setLayout(new FlowLayout());
-               JLabel b=new JLabel("<html>Это пробный<br>" +
-                       "вариант игры<br>" +
-                       "крестики-нолики<br>");
+               JLabel b=new JLabel(text.html());
                JScrollPane d=new JScrollPane(b);
                d.setPreferredSize(new Dimension(110,70));
                p.add(d);
@@ -140,7 +142,7 @@ class View extends EventDispatcher
 
         if(result.getText().equals(" "))
         {
-            result.setText("Anyone");
+            result.setText(text.anyone());
         }
         for(i=0;i<9;i++)
         {
@@ -152,7 +154,7 @@ class View extends EventDispatcher
     }
     public void setResultText(String ResultText)
     {
-        result.setText(ResultText + " " + "win");
+        result.setText(ResultText + " " + text.win());
     }
     public void setButtonText(String ButtonText, int x, int y)
     {
@@ -165,7 +167,7 @@ class View extends EventDispatcher
         {
            public void actionPerformed(ActionEvent e)
            {
-               dispatchEvent(getPos(jbt)[0], getPos(jbt)[1]);
+               dispatchEvent(getPos(jbt)[0], getPos(jbt)[1]);               
            }
         });
     }
