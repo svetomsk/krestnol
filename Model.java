@@ -9,12 +9,13 @@ class Model
     private String [] checkF = new String[fieldX*fieldY];
     public Model()
     {
-         newg();
-    }
+        check = true;
+        newg();
+    }   
 
     public void newcheck()
     {
-        check = true;
+        check = true;        
     }
     private void newg()
     {
@@ -26,12 +27,7 @@ class Model
                 number++;
             }
         }
-    }
-
-    public String getField(int x, int y)
-    {
-        return field[x][y];
-    }
+    }  
 
     public void setField(int x, int y, String value)
     {
@@ -39,18 +35,19 @@ class Model
     }
 
     public boolean who()
-    {
+    {       
+        boolean result = false;
         if(check == true)
-        {
+        {           
             check = false;
-            return true;
-        }else
-        {
+            result = true;
+        }else if(check == false)
+        {          
             check = true;
-            return false;
+            result = false;
         }
+        return result;
     }
-
     public void readField()throws IOException
     {
         BufferedReader readF = new BufferedReader(new FileReader("pole.txt"));
@@ -93,15 +90,7 @@ class Model
 
     public boolean checkField()
     {
-        boolean result = false;
-        for(int i = 0; i < fieldX - 2; i++)
-        {
-            if(checkF[i].equals(checkF[i+3])&&checkF[i+3].equals(checkF[i+6]))
-            {
-                result = true;
-            }            
-        }
-
+        boolean result = false;        
         for(int i = 0; i <= fieldX%3;i++)
         {
             for(int g = i; g <= fieldY%3;g++)
@@ -115,14 +104,14 @@ class Model
                     result = true;
                 }
             }
-            for(int h = i; h < fieldX - 2; h++)
+            for(int h = i; h < fieldY; h++)
             {
                 if(checkF[h].equals(checkF[h+3])&&checkF[h+3].equals(checkF[h+6]))
                 {
                     result = true;
                 }
             }
-            for(int h = i; h < fieldY; h+=3)
+            for(int h = i; h < fieldY*fieldX; h+=3)
             {
                 if(checkF[h].equals(checkF[h+1])&&checkF[h+1].equals(checkF[h+2]))
                 {

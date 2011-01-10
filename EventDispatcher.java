@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventDispatcher
-{
+{    
     List<IListener> listeners;
 
     public EventDispatcher()
@@ -15,6 +15,14 @@ public class EventDispatcher
     public void addEventListener(IListener listener)
     {
         listeners.add(listener);
+    }
+
+    public void newModel()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.newModel();
+        }
     }
 
     public void dispatchEvent(int x, int y)
