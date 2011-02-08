@@ -8,7 +8,7 @@ class GetText
 
     GetText()throws IOException
     {
-       bufR = new BufferedReader(new FileReader("text.txt"));
+       bufR = new BufferedReader(new FileReader("src/krestnol/text.txt"));
        for(int i = 0; i < kol; i++)
        {
            value[i] = bufR.readLine();

@@ -7,9 +7,9 @@ class Model
     private int fieldY = 3;
     private String [][] field = new String[fieldX][fieldY];
     private String [] checkF = new String[fieldX*fieldY];
+    
     public Model()
     {
-        check = true;
         newg();
     }   
 
@@ -17,6 +17,7 @@ class Model
     {
         check = true;        
     }
+
     private void newg()
     {
         int number = 1;
@@ -50,7 +51,7 @@ class Model
     }
     public void readField()throws IOException
     {
-        BufferedReader readF = new BufferedReader(new FileReader("pole.txt"));
+        BufferedReader readF = new BufferedReader(new FileReader("src/krestnol/pole.txt"));
         for(int i = 0; i < fieldX; i++){
             String[]read = readF.readLine().split(" ");
             System.arraycopy(read, 0, field[i], 0, 3);
@@ -69,7 +70,7 @@ class Model
 
     public void writeField()throws IOException
     {
-        BufferedWriter writeF = new BufferedWriter(new FileWriter("pole.txt"));
+        BufferedWriter writeF = new BufferedWriter(new FileWriter("src/krestnol/pole.txt"));
         for(int i = 0; i < fieldX; i++){
             for(int g = 0; g < fieldY; g++){
                 writeF.write(field[i][g]+" ");
