@@ -9,6 +9,7 @@ class Kontroler implements IListener
     private GetText text;
     private Model m = new Model();
     private View w;
+    private Cama cm;
     private Stat st;
     private final HumanPlayer pl1 = new HumanPlayer();
     private final HumanPlayer pl2 = new HumanPlayer();
@@ -16,14 +17,15 @@ class Kontroler implements IListener
     {
         try
         {
+            cm = new Cama();
             st = new Stat();
             st.updateFrom();
             text = new GetText();
-            w = new View(m, text, st);
+            w = new View(m, text, st, cm);
             w.addEventListener(this);
             w.getNames(pl1, pl2);            
             pl1.setSign(text.sign1());          
-            pl2.setSign(text.sign2());
+            pl2.setSign(text.sign2());                      
             w.show();
         } catch (IOException ex)
         {
@@ -46,8 +48,11 @@ class Kontroler implements IListener
                 if (m.who() == true)
                 {                    
                     w.setButtonText(pl1.getSign(), x, y);
-                    m.setField(x, y, pl1.getSign());
+                    m.setField(x, y, pl1.getSign());  
+                    
                     m.writeField();
+                    cm.add(m.getField());                   
+                    
                     if (m.checkField() == true) 
                     {
                         w.setResultText(pl1.getName());
@@ -60,13 +65,14 @@ class Kontroler implements IListener
                 {                   
                     w.setButtonText(pl2.getSign(), x, y);
                     m.setField(x, y, pl2.getSign());
+                    cm.add(m.getField());
                     m.writeField();
                     if (m.checkField() == true) 
                     {
                         w.setResultText(pl2.getName());
                         st.add(pl2.getName(), pl1.getName());
-                    st.updateTo();
-                    st.updateFrom();
+                        st.updateTo();
+                        st.updateFrom();
                     }
                 }                
             }
