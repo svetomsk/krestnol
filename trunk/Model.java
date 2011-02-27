@@ -30,6 +30,11 @@ class Model
         }
     }  
 
+    public String [][] getField()
+    {
+        return field;
+    }
+
     public void setField(int x, int y, String value)
     {
         field[x][y] = value;

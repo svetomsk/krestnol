@@ -10,6 +10,7 @@ class View extends EventDispatcher
 {
     private GetText text;
     private Model mod;
+    private Cama cama;
     private Window pole, ask, statistica;
     private JLabel result, hum1, hum2;
     private JTextField pl1, pl2;
@@ -22,11 +23,12 @@ class View extends EventDispatcher
     private int length = width*height;
     private boolean ready = false;
 
-    public View(final Model model, final GetText txt, final Stat st)throws IOException, InterruptedException
+    public View(final Model model, final GetText txt, final Stat st, Cama cm)throws IOException, InterruptedException
     {
         this.text = txt;
         s1 = st;
         mod = model;
+        cama = cm;
         createLabel();
         createFrame();
         addNewGame();
@@ -116,6 +118,13 @@ class View extends EventDispatcher
         exit.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
             {
+                try
+                {
+                    cama.upTo();
+                }catch(IOException exs)
+                {
+                    System.out.println("See in addExit()");
+                }
                 System.exit(0);
             }
         });

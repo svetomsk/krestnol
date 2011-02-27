@@ -1,4 +1,4 @@
-6
+9
 Winer           Loser
 Свет        Громозяка
 Мама         Светозар
@@ -6,3 +6,6 @@ Winer           Loser
 First          Second
 First          Second
 Привет        Человек
+First          Second
+sdfas             sdf
+Second          First
