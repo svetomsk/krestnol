@@ -7,4 +7,5 @@ interface IPlayer
     public void setSign(String value);
     public void setName(String value);
     public boolean notifyIP();
+    public void setTrue();
 }

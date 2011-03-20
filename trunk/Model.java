@@ -42,7 +42,6 @@ class Model
         {
             result = false;
         }
-        System.out.println(result);
         return result;
     }
 

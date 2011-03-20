@@ -79,7 +79,6 @@ class Cama
         for(int i = 0; i < size; i++)
         {
             tmp = list.get(i).getArray();
-            System.out.println(tmp[0][0]);
             check[i] = true;
             for(int g = 0; g < width; g++)
             {
@@ -133,22 +132,19 @@ class Cama
 
     public void nowPos(String[][]value, String s)
     {
-        if(s.equals("1"))
+        if(s.equals("X"))
         {
             if(contains(value) == false)
             {
-                System.out.println("sdfsf");
                 now.add(get(value));
             }else
             {
                 now.add(new Position(10,value));
-                System.out.println("sdffsd");
             }
         }else
         {
             if(contains(value) == false)
             {
-                System.out.println("fasdffadsfasdf");
                 now1.add(get(value));
             }else
             {
