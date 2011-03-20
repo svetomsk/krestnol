@@ -1,8 +1,5 @@
 package krestnol;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 class HumanPlayer implements IPlayer
 {
     private String sign;
@@ -13,6 +10,7 @@ class HumanPlayer implements IPlayer
     HumanPlayer(View w)
     {
         this.w = w;
+        result = false;
     }
 
     public void setName(String nik)
@@ -37,11 +35,19 @@ class HumanPlayer implements IPlayer
 
     public void hod()
     {
-        w.addListeners();
+        System.out.println("Внутри hod");
+        result = false;
+        System.out.println("hod"+this.getSign());
+        w.addListeners(this.getSign());        
     }
 
     public boolean notifyIP()
     {
         return result;
+    }
+
+    public void setTrue()
+    {
+        result = true;
     }
 }

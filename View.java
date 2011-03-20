@@ -219,10 +219,10 @@ class View extends EventDispatcher
             keys[i].setPreferredSize(new Dimension(50,50));
             keys[i].setBackground(Color.BLUE);
         }
-        for(i = 0; i <9; i++)
+        /*for(i = 0; i <9; i++)
         {
             addButton(keys[i]);
-        }
+        }*/
 
         if(result.getText().equals(" "))
         {
@@ -250,13 +250,20 @@ class View extends EventDispatcher
         keys[x*width+y].setEnabled(false);
     }
 
-    private void addButton(final JButton jbt)
+    private void addButton(final JButton jbt, final String st)
     {
         ActionListener al = new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                dispatchEvent(getPos(jbt)[0],getPos(jbt)[1]);
+                dispatchEvent(st, getPos(jbt)[0],getPos(jbt)[1]);
+                if(st.equals("Х"))
+                {                 
+                    goTwo();
+                }else
+                {
+                    goOne();
+                }
             }
         };
         jbt.addActionListener(al);
@@ -287,11 +294,11 @@ class View extends EventDispatcher
         }
     }
 
-    public void addListeners()
+    public void addListeners(String s)
     {
         for(i = 0; i < width*height; i++)
         {
-            addButton(keys[i]);
+            addButton(keys[i],s);
         }
     }
 }

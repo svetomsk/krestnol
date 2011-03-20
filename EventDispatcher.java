@@ -25,13 +25,35 @@ public class EventDispatcher
         }
     }
 
-    public void dispatchEvent(int x, int y)
+    public void dispatchEvent(String s, int x, int y)
     {
         for(IListener listener : listeners)
         {
-            listener.listen(x, y);
+            listener.listen(s, x, y);
         }
     }
 
+    public void goOne()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.goOne();
+        }
+    }
 
+    public void goTwo()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.goTwo();
+        }
+    }
+
+    public void trueOne()
+    {
+        for(IListener listner : listeners)
+        {
+            listner.trueOne();
+        }
+    }
 }

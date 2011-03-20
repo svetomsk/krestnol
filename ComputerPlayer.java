@@ -1,5 +1,5 @@
 package krestnol;
-class ComputerPlayer implements IPlayer
+class ComputerPlayer extends EventDispatcher implements IPlayer
 {
     private String sign;
     private String name;
@@ -41,11 +41,12 @@ class ComputerPlayer implements IPlayer
                 }
             }
         }
-        w.addListeners();
     }
 
     public boolean notifyIP()
     {
         return value;
     }
+
+    public void setTrue(){};
 }
