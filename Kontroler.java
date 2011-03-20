@@ -11,8 +11,9 @@ class Kontroler implements IListener
     private View w;
     private Cama cm;
     private Stat st;
-    private final HumanPlayer pl1 = new HumanPlayer();
-    private final HumanPlayer pl2 = new HumanPlayer();
+    private IPlayer pl1;
+    private IPlayer pl2;
+    private IPlayer pl3;
     Kontroler() throws InterruptedException
     {
         try
@@ -23,9 +24,12 @@ class Kontroler implements IListener
             text = new GetText();
             w = new View(m, text, st, cm);
             w.addEventListener(this);
-            w.getNames(pl1, pl2);            
-            pl1.setSign(text.sign1());          
-            pl2.setSign(text.sign2());                      
+            pl1 = new HumanPlayer(w);
+            pl3 = new HumanPlayer(w);
+            w.getNames(pl1, pl3);
+            pl1.setSign("Х");
+            pl3.setSign("O");
+           // pl2.setSign(text.sign2());
             w.show();
         } catch (IOException ex)
         {
@@ -51,28 +55,33 @@ class Kontroler implements IListener
                     m.setField(x, y, pl1.getSign());  
                     
                     m.writeField();
-                    cm.add(m.getField());                   
+                    String [][] a = m.getField();
+                    cm.add(a);
+                    cm.nowPos(a, "1");
                     
                     if (m.checkField() == true) 
                     {
                         w.setResultText(pl1.getName());
-                        st.add(pl1.getName(), pl2.getName());
+                        st.add(pl1.getName(), pl3.getName());
                         st.updateTo();
                         st.updateFrom();
+                        cm.endWin("1");
                     }                    
                 }
                 else
                 {                   
-                    w.setButtonText(pl2.getSign(), x, y);
-                    m.setField(x, y, pl2.getSign());
+                    w.setButtonText(pl3.getSign(), x, y);
+                    m.setField(x, y, pl3.getSign());
                     cm.add(m.getField());
+                    cm.nowPos(m.getField(), "2");
                     m.writeField();
                     if (m.checkField() == true) 
                     {
-                        w.setResultText(pl2.getName());
-                        st.add(pl2.getName(), pl1.getName());
+                        w.setResultText(pl3.getName());
+                        st.add(pl3.getName(), pl1.getName());
                         st.updateTo();
                         st.updateFrom();
+                        cm.endWin("2");
                     }
                 }                
             }
@@ -81,4 +90,11 @@ class Kontroler implements IListener
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /*public void game()
+    {        
+        pl1.hod();
+
+        pl3.hod();
+    }*/
 }

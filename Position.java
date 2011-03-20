@@ -1,5 +1,4 @@
 package krestnol;
-import java.io.*;
 class Position 
 {
     private String [][] position;
@@ -12,10 +11,7 @@ class Position
         position = new String[width][height];
         for(int i = 0; i < width; i++)
         {
-            for(int g = 0; g < height; g++)
-            {
-                position[i][g] = value[i][g];
-            }
+            System.arraycopy(value[i], 0, position[i], 0, height);
         }
     }
 

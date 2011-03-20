@@ -35,6 +35,17 @@ class Model
         return field;
     }
 
+    public boolean getF(int x, int y)
+    {
+        boolean result = true;
+        if(field[x][y].equals("X")||field[x][y].equals("O"))
+        {
+            result = false;
+        }
+        System.out.println(result);
+        return result;
+    }
+
     public void setField(int x, int y, String value)
     {
         field[x][y] = value;

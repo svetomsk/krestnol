@@ -12,6 +12,8 @@ class View extends EventDispatcher
     private Model mod;
     private Cama cama;
     private Window pole, ask, statistica;
+    private JRadioButton wcomp, bcomp, ocomp;
+    private ButtonGroup bg;
     private JLabel result, hum1, hum2;
     private JTextField pl1, pl2;
     private JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK, newGame, exit, stat;
@@ -34,6 +36,39 @@ class View extends EventDispatcher
         addNewGame();
         addStat();
         addExit();
+        //createRB();
+    }
+
+    private void createRB()
+    {
+        wcomp = new JRadioButton("Один игрок");
+        bcomp = new JRadioButton("Два игрока",true);
+        ocomp = new JRadioButton("Комп vs. комп");
+        wcomp.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent t)
+            {
+               pl1.setEnabled(true);
+               pl2.setEnabled(false);
+           }
+        });
+        ocomp.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent t)
+            {
+                pl1.setEnabled(false);
+                pl2.setEnabled(false);
+            }
+        });
+        bcomp.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent t)
+            {
+                pl1.setEnabled(true);
+                pl2.setEnabled(true);
+            }
+        });
+        bg = new ButtonGroup();
+        bg.add(wcomp);
+        bg.add(bcomp);
+        bg.add(ocomp);
     }
 
     private void createLabel()
@@ -46,7 +81,7 @@ class View extends EventDispatcher
     {
         pole=new Window();
         pole.setLayout(new FlowLayout());
-        pole.setSize(new Dimension(200,270));
+        pole.setSize(new Dimension(200,400));
         pole.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pole.setResizable(false);
     }
@@ -130,19 +165,20 @@ class View extends EventDispatcher
         });
     }
 
-    synchronized void getNames(final HumanPlayer p1, final HumanPlayer p2)
+    synchronized void getNames(final IPlayer p1, final IPlayer p2)
     {
         ready = false;
         ask = new Window();
         ask.setLayout(new FlowLayout());
         ask.setResizable(false);
-        ask.setSize(new Dimension(200,150));
+        ask.setSize(new Dimension(200,250));
         ask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hum1 = new JLabel("1st name: ");
         hum2 = new JLabel("2nd name: ");
         pl1 = new JTextField(7);
         pl2 = new JTextField(7);
         OK = new JButton("PLAY");
+        OK.setPreferredSize(new Dimension(100,30));
         OK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
             {
@@ -159,6 +195,9 @@ class View extends EventDispatcher
         ask.add(hum2);
         ask.add(pl2);
         ask.add(OK);
+        //ask.add(wcomp);
+       // ask.add(bcomp);
+        //ask.add(ocomp);
         ask.setVisible(true);
         while(ask.isVisible() == true)
         {
@@ -213,13 +252,14 @@ class View extends EventDispatcher
 
     private void addButton(final JButton jbt)
     {
-        jbt.addActionListener(new ActionListener()
+        ActionListener al = new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                dispatchEvent(getPos(jbt)[0], getPos(jbt)[1]);
+                dispatchEvent(getPos(jbt)[0],getPos(jbt)[1]);
             }
-        });
+        };
+        jbt.addActionListener(al);
     }
     private int[] getPos(final JButton btn)
     {
@@ -236,5 +276,22 @@ class View extends EventDispatcher
             }
         }
         return results;
+    }
+
+    public void delListeners()
+    {               
+        for(i = 0; i < width*height; i++)
+        {
+            ActionListener [] al = keys[i].getActionListeners();
+            keys[i].removeActionListener(al[0]);
+        }
+    }
+
+    public void addListeners()
+    {
+        for(i = 0; i < width*height; i++)
+        {
+            addButton(keys[i]);
+        }
     }
 }
