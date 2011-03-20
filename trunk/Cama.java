@@ -10,12 +10,15 @@ class Cama
     private int width = 3;
     private int height = 3;
     private ArrayList<Position> list;
+    private ArrayList<Position> now, now1;
 
     Cama() throws IOException
     {
         br = new BufferedReader(new FileReader("src/krestnol/pos.txt"));
         size = Integer.valueOf(br.readLine());
         list = new ArrayList<Position>();
+        now = new ArrayList<Position>();
+        now1 = new ArrayList<Position>();
         for(int i = 0; i < size; i++)
         {
             tmp = new String[width][height];
@@ -31,6 +34,7 @@ class Cama
             list.add(new Position(pr, tmp));
         }
         br.close();
+        
     }
   
     public void add(String[][] value)
@@ -75,6 +79,7 @@ class Cama
         for(int i = 0; i < size; i++)
         {
             tmp = list.get(i).getArray();
+            System.out.println(tmp[0][0]);
             check[i] = true;
             for(int g = 0; g < width; g++)
             {
@@ -96,5 +101,84 @@ class Cama
             }
         }
         return result;
+    }
+
+    private Position get(String[][]value)
+    {
+        Position result = null;
+        boolean ch;
+        for(int i = 0; i < size; i++)
+        {
+            tmp = list.get(i).getArray();
+            ch = true;
+            for(int t = 0; t < width; t++)
+            {
+                for(int g = 0; g < height; g++)
+                {
+                    if(!tmp[t][g].equals(value[t][g]))
+                    {
+                        ch = false;
+                        break;
+                    }
+                }
+            }
+            if(ch == true)
+            {
+                result = list.get(i);
+                break;
+            }
+        }
+        return result;
+    }
+
+    public void nowPos(String[][]value, String s)
+    {
+        if(s.equals("1"))
+        {
+            if(contains(value) == false)
+            {
+                System.out.println("sdfsf");
+                now.add(get(value));
+            }else
+            {
+                now.add(new Position(10,value));
+                System.out.println("sdffsd");
+            }
+        }else
+        {
+            if(contains(value) == false)
+            {
+                System.out.println("fasdffadsfasdf");
+                now1.add(get(value));
+            }else
+            {
+                now1.add(new Position(10,value));
+            }
+        }
+    }
+
+    public void endWin(String s)
+    {
+        if(s.equals("1"))
+        {
+            for(Position pos : now)
+            {
+                get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
+            }
+            for(Position pos : now1)
+            {
+                get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
+            }
+        }else
+        {
+            for(Position pos : now)
+            {
+                get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
+            }
+            for(Position pos : now1)
+            {
+                get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
+            }
+        }
     }
 }

@@ -1,19 +1,10 @@
 package krestnol;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 class Main
 {
-    static public void main(String[]args)
-    {
-        try
-        {
-            Kontroler kontroller = new Kontroler();
-        } catch (InterruptedException ex)
-        {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    static public void main(String[]args) throws InterruptedException
+    {     
+        Kontroler kontroller = new Kontroler();
+        //kontroller.game();
     }
 }
 
