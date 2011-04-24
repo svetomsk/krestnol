@@ -1,4 +1,4 @@
-53
+104
 16
 1 2 3 
 4 5 6 
@@ -211,3 +211,207 @@ O Х 6
 1 2 3 
 Х 5 6 
 Х O 9 
+-9
+X 2 3 
+4 Q 6 
+7 8 9 
+9
+X X Q 
+4 Q 6 
+7 8 9 
+9
+X X Q 
+X Q 6 
+7 Q 9 
+9
+X 2 3 
+4 5 6 
+7 8 Q 
+10
+X Q X 
+4 5 6 
+7 8 Q 
+10
+X Q X 
+4 Q 6 
+7 X Q 
+10
+X Q X 
+X Q 6 
+Q X Q 
+7
+X Q 3 
+4 Q 6 
+7 8 X 
+8
+X Q 3 
+Q Q 6 
+X 8 X 
+9
+X 2 3 
+4 Q X 
+7 8 Q 
+9
+X 2 3 
+X Q X 
+Q 8 Q 
+9
+X X Q 
+X Q X 
+Q 8 Q 
+5
+X 2 3 
+Q Q 6 
+X 8 9 
+10
+X 2 Q 
+Q Q X 
+X 8 9 
+9
+X 2 Q 
+Q Q X 
+X Q X 
+9
+X 2 3 
+Q 5 6 
+7 X Q 
+9
+X 2 3 
+Q Q X 
+7 X Q 
+9
+X X 3 
+Q Q X 
+Q X Q 
+9
+X Q X 
+4 Q 6 
+7 8 9 
+10
+X Q X 
+Q Q 6 
+X X Q 
+9
+X Q X 
+Q Q X 
+7 8 9 
+9
+X Q X 
+Q Q X 
+7 X Q 
+9
+X 2 Q 
+4 Q X 
+7 8 9 
+9
+X 2 Q 
+4 Q X 
+7 Q X 
+9
+X Q 3 
+X Q Q 
+7 8 X 
+9
+X Q X 
+X Q Q 
+Q 8 X 
+9
+X Q 3 
+4 Q X 
+7 8 9 
+9
+X Q Q 
+4 Q X 
+X 8 9 
+3
+X Q 3 
+4 5 6 
+7 8 9 
+9
+X Q Q 
+4 X 6 
+7 8 9 
+9
+X Q Q 
+Q X X 
+7 8 9 
+9
+X Q Q 
+Q X X 
+Q X 9 
+4
+X 2 3 
+4 Q 6 
+7 X Q 
+4
+X Q 3 
+4 Q X 
+7 X Q 
+4
+X Q 3 
+Q Q X 
+X X Q 
+4
+X Q 3 
+4 5 6 
+7 X Q 
+4
+X Q Q 
+4 X 6 
+7 X Q 
+4
+X Q Q 
+X X 6 
+Q X Q 
+5
+X 2 3 
+Q Q Q 
+X X 9 
+6
+X 2 3 
+4 5 6 
+7 Q 9 
+6
+X 2 3 
+X 5 6 
+Q Q 9 
+6
+X Q 3 
+X 5 6 
+Q Q X 
+4
+X 2 3 
+Q 5 6 
+7 8 9 
+7
+X 2 3 
+Q 5 6 
+X Q 9 
+7
+X 2 X 
+Q 5 Q 
+X Q 9 
+8
+X X 3 
+Q 5 6 
+7 Q 9 
+8
+X X 3 
+Q 5 Q 
+7 Q X 
+8
+X X Q 
+Q 5 Q 
+X Q X 
+9
+X Q 3 
+Q 5 6 
+X 8 9 
+9
+X Q 3 
+Q 5 X 
+X 8 Q 
+9
+X Q X 
+Q 5 X 
+X Q Q 

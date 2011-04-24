@@ -30,7 +30,6 @@ class Kontroler implements IListener
             w.getNames(pl1, pl3);
             pl1.setSign(text.sign1());
             pl3.setSign(text.sign2());
-           // pl2.setSign(text.sign2());
             w.show();
         } catch (IOException ex)
         {
@@ -65,7 +64,8 @@ class Kontroler implements IListener
                         st.updateTo();
                         st.updateFrom();
                         try {
-                            w.endWindow("X win");
+                            System.out.println("HERE 1");
+                            w.endWindow(text.sign2() +  " win");
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -77,7 +77,8 @@ class Kontroler implements IListener
                         st.updateTo();
                         st.updateFrom();
                         try {
-                            w.endWindow("O win");
+                            System.out.println("HERE 2");
+                            w.endWindow(text.sign1() + " win");
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -88,9 +89,12 @@ class Kontroler implements IListener
         {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            if (m.isAll()) {
-                try {
+        try
+        {
+            if (m.isAll())
+            {
+                try
+                {
                     w.endWindow("Drawn");
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);

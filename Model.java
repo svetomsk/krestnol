@@ -45,7 +45,7 @@ class Model
             {
                 for(int g = 0; g < fieldY; g++)
                 {
-                    if(!field[i][g].equals(text.sign1()) && !field[i][g].equals("U"))
+                    if(!field[i][g].equals(text.sign1()) && !field[i][g].equals(text.sign2()))
                     {
                         result = false;
                         temp = true;
