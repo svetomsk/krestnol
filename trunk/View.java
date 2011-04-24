@@ -126,8 +126,8 @@ class View extends EventDispatcher
 
     public void endWindow(String value) throws InterruptedException
     {
-        if(isFirst == true)
-        {
+      /*  if(isFirst == true)
+        {*/
             JLabel nd = new JLabel("Game over. Try again?");
             nd.setLayout(new GridLayout());
             nd.setPreferredSize(new Dimension(130,20));
@@ -179,7 +179,7 @@ class View extends EventDispatcher
             endW.add(yes);
             endW.add(no);
             endW.setVisible(true);
-        }    
+       /* }  */
         
     }
 

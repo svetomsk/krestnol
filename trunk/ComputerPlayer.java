@@ -46,7 +46,12 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
 
     public void hod()
     {
-        System.out.println(sign);
+        boolean temp1 = false;
+        try {
+            System.out.println(m.isAll());
+        } catch (IOException ex) {
+            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         w.delListeners();
         boolean end = false;
         try {
@@ -54,6 +59,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                 end = true;
                 try {
                     w.endWindow("Drawn");
+                    temp1= true;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -61,7 +67,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
         } catch (IOException ex) {
             Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(end == false)
+        if(end == false && temp1 == false)
         {
             boolean temp = false;
             Random r = new Random();
@@ -102,7 +108,9 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                         st.updateFrom();
                         cm.endWin("1");
                         try {
-                            w.endWindow(sign + " win");
+                            System.out.println("HERE 3");
+                            w.endWindow(txt.sign1()+ " win");
+                            temp1 = true;
                         } catch (InterruptedException ex) {
                             Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -129,13 +137,22 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                 }*/
             }
             try {
-                if (m.isAll() == true) {
+                if (m.isAll() == true && temp1 == false)
+                {
+                    try
+                    {
+                        w.endWindow("Drawn");
+                    } catch (InterruptedException ex)
+                    {
+                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    temp1 = true;
                     end = true;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(end == false)
+            if(end == false && temp1 == false)
             {
                 if(sign.equals("X"))
                 {
@@ -145,6 +162,11 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                     w.goOne();
                 }
             }
+        }
+        try {
+            System.out.println(m.isAll());
+        } catch (IOException ex) {
+            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
