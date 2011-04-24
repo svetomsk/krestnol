@@ -1,7 +1,7 @@
 Player1
 X
 Player2
-O
+Q
 X vs O
 Файл
 Игра

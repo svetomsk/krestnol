@@ -7,28 +7,55 @@ class Model
     private int fieldY = 3;
     private String [][] field = new String[fieldX][fieldY];
     private String [] checkF = new String[fieldX*fieldY];
+    private GetText text;
     
-    public Model()
+    public Model(GetText txt)
     {
-        newg();
+        text = txt;
+        this.newg();
     }   
 
     public void newcheck()
     {
         check = true;        
     }
-
+    
     private void newg()
     {
         int number = 1;
 
-        for(int i = 0; i < fieldX; i++){
-            for(int g = 0; g < fieldY; g++){
+        for(int i = 0; i < fieldX; i++)
+        {
+            for(int g = 0; g < fieldY; g++)
+            {
                 field[i][g] = Integer.toString(number);
                 number++;
             }
         }
-    }  
+    }
+
+    public boolean isAll() throws IOException
+    {
+        this.readField();
+        boolean result = true;
+        boolean temp = false;
+        for(int i = 0; i < fieldX; i++)
+        {
+            if(temp == false)
+            {
+                for(int g = 0; g < fieldY; g++)
+                {
+                    if(!field[i][g].equals(text.sign1()) && !field[i][g].equals("U"))
+                    {
+                        result = false;
+                        temp = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 
     public String [][] getField()
     {
@@ -38,7 +65,7 @@ class Model
     public boolean getF(int x, int y)
     {
         boolean result = true;
-        if(field[x][y].equals("X")||field[x][y].equals("O"))
+        if(field[x][y].equals(text.sign1())||field[x][y].equals(text.sign2()))
         {
             result = false;
         }
@@ -79,6 +106,19 @@ class Model
             {
                 checkF[t] = field[i][g];
                 t++;
+            }
+        }
+    }
+
+    public void newField()
+    {
+        int temp = 1;
+        for(int i = 0; i < fieldX; i++)
+        {
+            for(int g = 0; g < fieldY; g++)
+            {
+                field[i][g] = Integer.toString(temp);
+                temp++;
             }
         }
     }

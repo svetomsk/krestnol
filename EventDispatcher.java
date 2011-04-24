@@ -6,6 +6,21 @@ import java.util.List;
 public class EventDispatcher
 {    
     List<IListener> listeners;
+    public void game()
+    {
+        for(IListener i : listeners)
+        {
+            i.game();
+        }
+    }
+
+    public void newGame()
+    {
+        for(IListener l : listeners)
+        {
+            l.newGame();
+        }
+    }
 
     public EventDispatcher()
     {

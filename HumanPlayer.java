@@ -35,9 +35,7 @@ class HumanPlayer implements IPlayer
 
     public void hod()
     {
-        System.out.println("Внутри hod");
         result = false;
-        System.out.println("hod"+this.getSign());
         w.addListeners(this.getSign());        
     }
 

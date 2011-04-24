@@ -24,6 +24,7 @@ class View extends EventDispatcher
     private int height = 3;
     private int length = width*height;
     private boolean ready = false;
+    private boolean isFirst = true;
 
     public View(final Model model, final GetText txt, final Stat st, Cama cm)throws IOException, InterruptedException
     {
@@ -96,23 +97,90 @@ class View extends EventDispatcher
         newGame.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
             {
-                mod = new Model();
+                mod = new Model(text);
                 newModel();
                 mod.newcheck();
                 try
                 {
-                mod.writeField();
-                for (i = 0; i < 9; i++)
+                    mod.newField();
+                    mod.writeField();
+                    for (i = 0; i < 9; i++)
+                    {
+                        keys[i].setEnabled(true);
+                        keys[i].setText(" ");
+                    }
+
+                    result.setText(text.anyone());
+                } catch (IOException ex)
                 {
-                    keys[i].setEnabled(true);
-                    keys[i].setText(" ");
+                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                result.setText(text.anyone());
-                } catch (IOException ex) {
-                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                for(i = 0; i < width*height; i++)
+                {
+                    addButton(keys[i],"X");
                 }
+                newGame();
             }
         });
+    }
+
+    public void endWindow(String value) throws InterruptedException
+    {
+        if(isFirst == true)
+        {
+            JLabel nd = new JLabel("Game over. Try again?");
+            nd.setLayout(new GridLayout());
+            nd.setPreferredSize(new Dimension(130,20));
+            isFirst = false;
+            pole.setVisible(false);
+            final Window endW = new Window();
+            endW.setTitle(value);
+            endW.setSize(200,100);
+            endW.setLayout(new FlowLayout());
+            JButton yes = new JButton("YES");
+            JButton no = new JButton("NO");
+            yes.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent ae)
+                {
+                    mod = new Model(text);
+                    newModel();
+                    mod.newcheck();
+                    try
+                    {
+                        mod.newField();
+                        mod.writeField();
+                        for (i = 0; i < 9; i++)
+                        {
+                            keys[i].setEnabled(true);
+                            keys[i].setText(" ");
+                        }
+
+                        result.setText(text.anyone());
+                    } catch (IOException ex)
+                    {
+                        Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    for(i = 0; i < width*height; i++)
+                    {
+                        addButton(keys[i],"X");
+                    }
+                    newGame();
+                    pole.setVisible(true);
+                    endW.setVisible(false);
+                }
+            });
+            no.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent ae)
+                {
+                    System.exit(0);
+                }
+            });
+            endW.add(nd);
+            endW.add(yes);
+            endW.add(no);
+            endW.setVisible(true);
+        }    
+        
     }
 
     private void addStat()
@@ -219,11 +287,6 @@ class View extends EventDispatcher
             keys[i].setPreferredSize(new Dimension(50,50));
             keys[i].setBackground(Color.BLUE);
         }
-        /*for(i = 0; i <9; i++)
-        {
-            addButton(keys[i]);
-        }*/
-
         if(result.getText().equals(" "))
         {
             result.setText(text.anyone());
@@ -257,8 +320,8 @@ class View extends EventDispatcher
             public void actionPerformed(ActionEvent e)
             {
                 dispatchEvent(st, getPos(jbt)[0],getPos(jbt)[1]);
-                if(st.equals("Х"))
-                {                 
+                if(st.equals(text.sign1()))
+                {
                     goTwo();
                 }else
                 {
@@ -286,11 +349,12 @@ class View extends EventDispatcher
     }
 
     public void delListeners()
-    {               
+    {
         for(i = 0; i < width*height; i++)
         {
             ActionListener [] al = keys[i].getActionListeners();
-            keys[i].removeActionListener(al[0]);
+            for(int g = 0; g < al.length; g++)
+                keys[i].removeActionListener(al[g]);
         }
     }
 
