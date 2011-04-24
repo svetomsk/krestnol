@@ -1,17 +1,33 @@
 package krestnol;
+
+import java.io.*;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 class ComputerPlayer extends EventDispatcher implements IPlayer
 {
-    private String sign;
+    private String sign, sign1;
     private String name;
+    private Stat st;
+    private Cama cm;
     private Model m;
     private View w;
+    private String name1, name2;
     private boolean value;
-    ComputerPlayer(Model m, View w)
+    private GetText txt;
+    ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, String s2, GetText txt, String sign, String sign1)
     {
-        sign = "X";
+        this.txt = txt;
+        this.sign = sign;
+        this.sign1 = sign1;
         name = "Computer";
         this.m = m;
         this.w = w;
+        this.st = st;
+        this.cm = cm;
+        name1 = s1;
+        name2 = s2;
     }
 
     public void setSign(String value){}
@@ -30,14 +46,103 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
 
     public void hod()
     {
+        System.out.println(sign);
         w.delListeners();
-        for(int i = 0; i < 3; i++)
+        boolean end = false;
+        try {
+            if (m.isAll() == true) {
+                end = true;
+                try {
+                    w.endWindow("Drawn");
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(end == false)
         {
-            for(int g = 0; g < 3; g++)
+            boolean temp = false;
+            Random r = new Random();
+            int x = 0;
+            int y = 0;
+            try {
+                m.readField();
+            } catch (IOException ex) {
+                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while(m.getF(x, y) == false)
             {
-                if(m.getF(i, g) == true)
+                x = 0 + r.nextInt(3);
+                y = 0 + r.nextInt(3);
+            }
+            w.setButtonText(sign,x,y);
+            m.setField(x,y,sign);
+            try {
+                m.writeField();
+            } catch (IOException ex) {
+                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                m.writeField();
+            } catch (IOException ex) {
+                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(m.checkField() == true)
+            {
+                end = true;
+               /* if(this.getSign().equals(sign))
+                {*/
+                    try {
+                        w.delListeners();
+                        w.setResultText(sign);
+                        st.add(name1, name2);
+                        st.updateTo();
+                        st.updateFrom();
+                        cm.endWin("1");
+                        try {
+                            w.endWindow(sign + " win");
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+               /* }else
                 {
-                    w.setButtonText("O", i, g);
+                    try {
+                        w.delListeners();
+                        w.setResultText(name1);
+                        st.add(name1, name2);
+                        st.updateTo();
+                        st.updateFrom();
+                        cm.endWin("2");
+                        try {
+                            w.endWindow("O win");
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }*/
+            }
+            try {
+                if (m.isAll() == true) {
+                    end = true;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(end == false)
+            {
+                if(sign.equals("X"))
+                {
+                    w.goTwo();
+                }else
+                {
+                    w.goOne();
                 }
             }
         }

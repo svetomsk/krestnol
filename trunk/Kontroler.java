@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 class Kontroler implements IListener
 {
     private GetText text;
-    private Model m = new Model();
+    private Model m ;
     private View w;
     private Cama cm;
     private Stat st;
@@ -22,13 +22,14 @@ class Kontroler implements IListener
             st = new Stat();
             st.updateFrom();
             text = new GetText();
+            m = new Model(text);
             w = new View(m, text, st, cm);
             w.addEventListener(this);
-            pl1 = new HumanPlayer(w);
+            pl1 = new ComputerPlayer(m,w,st,cm, "First","Second",text,"X","O");
             pl3 = new HumanPlayer(w);
             w.getNames(pl1, pl3);
-            pl1.setSign("Х");
-            pl3.setSign("O");
+            pl1.setSign(text.sign1());
+            pl3.setSign(text.sign2());
            // pl2.setSign(text.sign2());
             w.show();
         } catch (IOException ex)
@@ -39,7 +40,7 @@ class Kontroler implements IListener
 
     public void newModel()
     {
-        m = new Model();
+        m = new Model(text);
     }
 
     public void listen(String s,int x, int y)
@@ -56,20 +57,30 @@ class Kontroler implements IListener
                 cm.nowPos(m.getField(),s);
                 if(m.checkField() == true)
                 {
-                    if(s.equals("X"))
+                    if(s.equals(text.sign1()))
                     {
+                        w.delListeners();
                         w.setResultText(pl1.getName());
                         st.add(pl1.getName(), pl3.getName());
                         st.updateTo();
                         st.updateFrom();
-                        cm.endWin("1");
+                        try {
+                            w.endWindow("X win");
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }else
                     {
+                        w.delListeners();
                         w.setResultText(pl3.getName());
                         st.add(pl3.getName(), pl1.getName());
                         st.updateTo();
                         st.updateFrom();
-                        cm.endWin("2");
+                        try {
+                            w.endWindow("O win");
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
@@ -77,23 +88,31 @@ class Kontroler implements IListener
         {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            if (m.isAll()) {
+                try {
+                    w.endWindow("Drawn");
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void game()
     {
         pl1.hod();
-        while(pl1.notifyIP() == false){}               
     }
 
     public void goOne()
     {
-        w.delListeners();
         pl1.hod();        
     }
 
     public void goTwo()
     {
-        w.delListeners();
         pl3.hod();
     }
 
@@ -103,5 +122,9 @@ class Kontroler implements IListener
         w.delListeners();
     }
 
-    
+    public void newGame()
+    {
+        w.delListeners();
+        pl1.hod();
+    }
 }

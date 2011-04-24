@@ -7,7 +7,7 @@ class GetText
     private String [] value = new String[kol];
 
     GetText()throws IOException
-    {        
+    {
        bufR = new BufferedReader(new FileReader("src/krestnol/text.txt"));
        for(int i = 0; i < kol; i++)
        {
