@@ -25,8 +25,8 @@ class Kontroler implements IListener
             m = new Model(text);
             w = new View(m, text, st, cm);
             w.addEventListener(this);
-            pl1 = new ComputerPlayer(m,w,st,cm, "First","Second",text,"X","O");
-            pl3 = new HumanPlayer(w);
+            pl1 = new HumanPlayer(w) /*new ComputerPlayer(m,w,st,cm, "First","Second",text,"X","O")*/;
+            pl3 = new HumanPlayer(w) /*new ComputerPlayer(m,w,st,cm, "Second","First",text,"O","X")*/;
             w.getNames(pl1, pl3);
             pl1.setSign(text.sign1());
             pl3.setSign(text.sign2());
@@ -65,7 +65,6 @@ class Kontroler implements IListener
                         st.updateFrom();
                         try 
                         {
-                            System.out.println("X win");
                             w.endWindow(text.sign1() +  " win");
                             pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {
@@ -80,7 +79,6 @@ class Kontroler implements IListener
                         st.updateFrom();
                         try 
                         {
-                            System.out.println("Q win");
                             w.endWindow(text.sign2() + " win");
                             pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {

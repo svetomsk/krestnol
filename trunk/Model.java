@@ -15,6 +15,11 @@ class Model
         this.newg();
     }   
 
+    public String getFieldMean(int i, int g)
+    {
+        return field[i][g];
+    }
+    
     public void newcheck()
     {
         check = true;        

@@ -72,7 +72,7 @@ class Cama
         bw.close();
     }
 
-    private boolean contains(String[][]value)
+    public boolean contains(String[][]value)
     {
         boolean result = true;
         boolean [] check = new boolean[size];
@@ -102,7 +102,7 @@ class Cama
         return result;
     }
 
-    private Position get(String[][]value)
+    public Position get(String[][]value)
     {
         Position result = null;
         boolean ch;
@@ -134,18 +134,18 @@ class Cama
     {
         if(s.equals("X"))
         {
-            if(contains(value) == false)
+            if(this.contains(value) == false)
             {
-                now.add(get(value));
+                now.add(this.get(value));
             }else
             {
                 now.add(new Position(10,value));
             }
         }else
         {
-            if(contains(value) == false)
+            if(this.contains(value) == false)
             {
-                now1.add(get(value));
+                now1.add(this.get(value));
             }else
             {
                 now1.add(new Position(10,value));
@@ -159,21 +159,21 @@ class Cama
         {
             for(Position pos : now)
             {
-                get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
+                this.get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
             }
             for(Position pos : now1)
             {
-                get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
+                this.get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
             }
         }else
         {
             for(Position pos : now)
             {
-                get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
+                this.get(pos.getArray()).setPrioritet(pos.getPrioritet()-1);
             }
             for(Position pos : now1)
             {
-                get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
+                this.get(pos.getArray()).setPrioritet(pos.getPrioritet()+1);
             }
         }
     }

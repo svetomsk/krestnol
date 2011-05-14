@@ -174,6 +174,13 @@ class View extends EventDispatcher
             no.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent ae)
                 {
+                    try
+                    {
+                        cama.upTo();
+                    }catch (IOException exs)
+                    {
+                        System.out.println("Line 182");
+                    }
                     System.exit(0);
                 }
             });
@@ -322,6 +329,12 @@ class View extends EventDispatcher
             public void actionPerformed(ActionEvent e)
             {
                 dispatchEvent(st, getPos(jbt)[0],getPos(jbt)[1]);
+                for(i = 0; i < width*height; i++)
+                {
+                    ActionListener [] al = keys[i].getActionListeners();
+                    for(int g = 0; g < al.length; g++)
+                        keys[i].removeActionListener(al[g]);
+                }
                 if(st.equals(text.sign1()))
                 {
                     goTwo();
