@@ -8,4 +8,5 @@ interface IPlayer
     public void setName(String value);
     public boolean notifyIP();
     public void setTrue();
+    public void setReadyToHod(boolean value);
 }

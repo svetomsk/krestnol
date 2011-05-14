@@ -1,4 +1,4 @@
-80
+111
 Winer           Loser
 ыва              фыва
 фв                фва
@@ -78,5 +78,36 @@ First          Second
 First          Second
 sf           Computer
 First          Second
+First          Second
+First          Second
+second       Computer
+First          Second
+second       Computer
+First          Second
+second       Computer
+First          Second
+First          Second
+ывафы        Computer
+First          Second
+First          Second
+фы           Computer
+First          Second
+ываф         Computer
+First          Second
+First          Second
+фы           Computer
+First          Second
+First          Second
+First          Second
+First          Second
+фва          Computer
+ыфвафыва     Computer
+ыфва         Computer
+First          Second
+ываывфа      Computer
+First          Second
+ывфаф        Computer
+выфаыфва     Computer
+фыва         Computer
 First          Second
 First          Second
