@@ -1,633 +1,265 @@
-158
-16
-1 2 3 
-4 5 6 
-Х 8 9 
-5
-1 2 3 
-4 5 6 
-Х O 9 
-12
-1 2 3 
-4 Х 6 
-Х O 9 
-8
-1 2 3 
-4 Х 6 
-Х O O 
+66
 11
-Х 2 3 
-4 Х 6 
-Х O O 
+X 2 3 
+4 5 6 
+7 8 9 
 9
-Х 2 3 
-4 Х O 
-Х O O 
-11
-Х 2 3 
-Х Х O 
-Х O O 
-11
-1 2 Х 
-4 Х 6 
-Х O O 
-9
-1 2 3 
+X 2 3 
 4 5 6 
-Х O Х 
+O 8 9 
 11
-1 2 3 
-4 O 6 
-Х O Х 
-9
-1 2 3 
-Х O 6 
-Х O Х 
-11
-1 O 3 
-Х O 6 
-Х O Х 
-16
-1 2 3 
-4 5 6 
-Х Х 9 
-6
-1 2 3 
-4 O 6 
-Х Х 9 
-14
-1 2 3 
-4 Х 6 
-Х Х 9 
-8
-1 2 3 
-4 Х 6 
-Х Х O 
-12
-1 2 3 
-4 Х 6 
-Х Х Х 
-10
-1 2 3 
+X 2 X 
 4 5 6 
 O 8 9 
 9
-1 2 3 
-4 5 6 
-O Х 9 
-12
-1 2 3 
-4 5 6 
-O O 9 
-10
-1 2 3 
-4 Х 6 
-O O 9 
-10
-1 2 3 
+X 2 X 
 4 O 6 
-O O 9 
-8
-1 2 3 
-4 5 6 
-O Х O 
+O 8 9 
 11
-1 2 3 
-4 5 6 
-O Х Х 
-12
-1 2 3 
-4 Х 6 
-O Х O 
+X 2 X 
+4 O 6 
+O 8 X 
 9
+X 2 X 
+4 O O 
+O 8 X 
+11
+X X X 
+4 O O 
+O 8 X 
+10
+1 2 3 
+4 5 6 
+X 8 9 
+10
 1 2 3 
 4 O 6 
-O Х O 
-8
+X 8 9 
+10
 1 2 3 
-O Х 6 
-O Х O 
-11
+4 X 6 
+X 8 9 
+10
 1 2 3 
-Х Х 6 
-O Х O 
-11
-1 Х 3 
-O Х 6 
-O Х O 
+O X 6 
+X 8 9 
+10
+1 2 3 
+X X 6 
+X 8 9 
 10
 1 2 3 
 O 5 6 
-O Х 9 
+X 8 9 
 10
-1 2 3 
-Х 5 6 
-O Х 9 
+1 O 3 
+O X 6 
+X 8 9 
 10
-1 2 3 
-O Х 6 
-O Х 9 
+X O 3 
+O X 6 
+X 8 9 
 10
-1 2 3 
-O O 6 
-O Х 9 
+X O 3 
+O X O 
+X 8 9 
 10
-1 2 3 
-4 O 6 
-O Х 9 
+X O 3 
+O X O 
+X X 9 
 10
-1 2 3 
-4 Х 6 
-O Х 9 
+X O 3 
+O X O 
+X X O 
 10
-1 2 3 
-4 O 6 
-O Х Х 
-9
-1 2 3 
+X O X 
+O X O 
+X X O 
+10
+X O X 
 4 5 6 
-O O Х 
-11
-1 2 3 
-4 5 6 
-O O O 
+O 8 9 
+10
+X O X 
+X 5 6 
+O 8 9 
+10
+X O X 
+X 5 6 
+O O 9 
+10
+X O X 
+X 5 X 
+O O 9 
+10
+X 2 3 
+O 5 6 
+X 8 9 
+10
+X O 3 
+O 5 6 
+X 8 9 
+10
+X O 3 
+O X 6 
+X 8 O 
+10
+X O 3 
+O X 6 
+X X O 
+10
+X O O 
+O X 6 
+X X O 
+10
+X O O 
+O X X 
+X X O 
 10
 1 2 3 
-4 5 6 
-Х O O 
-10
-1 2 3 
-4 O 6 
-Х O O 
-10
-1 2 3 
-O Х 6 
-Х O O 
-10
-1 2 3 
-Х Х 6 
-Х O O 
-10
-1 2 3 
-O Х Х 
-Х O O 
-10
-1 2 3 
-O Х O 
-Х O O 
-8
-1 2 3 
-4 5 6 
-Х Х O 
-13
-1 2 3 
-4 5 6 
-Х Х Х 
-10
-1 2 3 
-Х O O 
-Х O Х 
+X O 6 
+X 8 9 
 10
 O 2 3 
-Х O 6 
-Х O Х 
+X O 6 
+X 8 9 
 10
-O Х 3 
-Х O 6 
-Х O Х 
-10
-O Х 3 
-Х O O 
-Х O Х 
-10
-O Х Х 
-Х O O 
-Х O Х 
-10
-1 2 3 
-O Х 6 
-Х O 9 
-10
-1 2 3 
-Х 5 6 
-Х O 9 
--15
-X 2 3 
-4 Q 6 
-7 8 9 
-8
-X X Q 
-4 Q 6 
-7 8 9 
-9
-X X Q 
-X Q 6 
-7 Q 9 
-9
-X 2 3 
-4 5 6 
-7 8 Q 
-10
-X Q X 
-4 5 6 
-7 8 Q 
-10
-X Q X 
-4 Q 6 
-7 X Q 
-10
-X Q X 
-X Q 6 
-Q X Q 
-7
-X Q 3 
-4 Q 6 
-7 8 X 
-8
-X Q 3 
-Q Q 6 
+O 2 3 
+X O 6 
 X 8 X 
-9
-X 2 3 
-4 Q X 
-7 8 Q 
-9
-X 2 3 
-X Q X 
-Q 8 Q 
-9
-X X Q 
-X Q X 
-Q 8 Q 
-5
-X 2 3 
-Q Q 6 
-X 8 9 
 10
-X 2 Q 
-Q Q X 
-X 8 9 
-9
-X 2 Q 
-Q Q X 
-X Q X 
-9
-X 2 3 
-Q 5 6 
-7 X Q 
-9
-X 2 3 
-Q Q X 
-7 X Q 
-9
-X X 3 
-Q Q X 
-Q X Q 
-9
-X Q X 
-4 Q 6 
-7 8 9 
-10
-X Q X 
-Q Q 6 
-X X Q 
-9
-X Q X 
-Q Q X 
-7 8 9 
-9
-X Q X 
-Q Q X 
-7 X Q 
-6
-X 2 Q 
-4 Q X 
-7 8 9 
-9
-X 2 Q 
-4 Q X 
-7 Q X 
-9
-X Q 3 
-X Q Q 
-7 8 X 
-9
-X Q X 
-X Q Q 
-Q 8 X 
-9
-X Q 3 
-4 Q X 
-7 8 9 
-9
-X Q Q 
-4 Q X 
-X 8 9 
-0
-X Q 3 
-4 5 6 
-7 8 9 
-9
-X Q Q 
-4 X 6 
-7 8 9 
-9
-X Q Q 
-Q X X 
-7 8 9 
-9
-X Q Q 
-Q X X 
-Q X 9 
-4
-X 2 3 
-4 Q 6 
-7 X Q 
-4
-X Q 3 
-4 Q X 
-7 X Q 
-4
-X Q 3 
-Q Q X 
-X X Q 
-4
-X Q 3 
-4 5 6 
-7 X Q 
-4
-X Q Q 
-4 X 6 
-7 X Q 
-4
-X Q Q 
-X X 6 
-Q X Q 
-5
-X 2 3 
-Q Q Q 
-X X 9 
-6
-X 2 3 
-4 5 6 
-7 Q 9 
-6
-X 2 3 
-X 5 6 
-Q Q 9 
-6
-X Q 3 
-X 5 6 
-Q Q X 
-4
-X 2 3 
-Q 5 6 
-7 8 9 
-7
-X 2 3 
-Q 5 6 
-X Q 9 
-7
-X 2 X 
-Q 5 Q 
-X Q 9 
-8
-X X 3 
-Q 5 6 
-7 Q 9 
-8
-X X 3 
-Q 5 Q 
-7 Q X 
-8
-X X Q 
-Q 5 Q 
-X Q X 
-7
-X Q 3 
-Q 5 6 
-X 8 9 
-9
-X Q 3 
-Q 5 X 
-X 8 Q 
-9
-X Q X 
-Q 5 X 
-X Q Q 
-7
-X 2 Q 
-4 Q X 
-Q 8 X 
-8
-X Q 3 
-4 Q 6 
-X 8 9 
-8
-X Q X 
-4 Q 6 
-X Q 9 
-9
-X X Q 
-4 Q X 
-Q 8 9 
-10
-X 2 3 
-4 Q 6 
-Q 8 X 
-10
-X Q 3 
-4 Q X 
-Q 8 X 
-8
-X Q 3 
-Q Q 6 
-X X 9 
-9
-X Q 3 
-X 5 6 
-Q 8 9 
-9
-X Q 3 
-X X Q 
-Q 8 9 
-10
-X Q 3 
-4 X 6 
-7 8 Q 
-10
-X Q X 
-4 X 6 
-Q 8 Q 
-10
-X Q X 
-Q X 6 
-Q X Q 
-10
-X 2 3 
-Q X 6 
-7 8 Q 
-10
-X Q 3 
-Q X 6 
-7 X Q 
-10
-X Q Q 
-Q X X 
-7 X Q 
-10
-X X Q 
-4 Q Q 
-7 X 9 
-10
-X X Q 
-4 Q Q 
-X X Q 
-8
-X 2 3 
-4 O 6 
-7 8 9 
-10
-X 2 3 
+O 2 3 
 X O 6 
-O 8 9 
-10
-X 2 O 
 X O X 
-O 8 9 
 10
-X 2 3 
-X Q 6 
-Q 8 9 
+O X 3 
+X O 6 
+X O X 
 10
-X Q X 
-X Q 6 
-Q 8 9 
+O X 3 
+X O O 
+X O X 
 10
-X Q X 
-X Q Q 
-Q X 9 
-10
-X 2 3 
-Q X X 
-Q 8 Q 
-10
-X Q 3 
-Q X X 
-Q X Q 
-10
-X X Q 
-Q Q 6 
-X 8 9 
-10
-X X Q 
-Q Q 6 
-X X Q 
-10
-X 2 Q 
-Q Q X 
-X X Q 
-10
-X Q X 
-X Q X 
-Q Q 9 
-9
-X O 3 
-4 5 6 
-7 8 9 
-9
-X O 3 
-O 5 6 
-7 X 9 
-9
-X O 3 
-O O X 
-7 X 9 
-8
-X O 3 
-O O X 
 O X X 
+X O O 
+X O X 
+10
+1 2 3 
+4 X 6 
+7 8 9 
+10
+1 2 3 
+O X 6 
+7 8 9 
 10
 X 2 3 
-4 O 6 
-7 O X 
+O X 6 
+7 8 9 
 10
 X 2 3 
-X O 6 
-O O X 
+O X 6 
+7 8 O 
 10
+X 2 3 
+O X 6 
+7 X O 
+10
+X O 3 
+O X 6 
+7 X O 
+10
+1 2 3 
+X 5 6 
+7 8 9 
+10
+O 2 3 
+X 5 6 
+7 8 9 
+10
+O X 3 
+X 5 6 
+7 8 9 
+10
+O X O 
+X 5 6 
+7 8 9 
+10
+O X O 
+X X 6 
+7 8 9 
+10
+O X O 
+X X 6 
+7 O 9 
+10
+O X O 
+X X 6 
+X O 9 
+10
+O X O 
 X X O 
-X O 6 
-O O X 
-7
-X 2 3 
-O 5 6 
+X O 9 
+10
+O X O 
+X X O 
+X O X 
+10
+1 X 3 
+O X 6 
 7 8 9 
 10
-X O X 
-O 5 6 
-7 8 9 
+1 X 3 
+O X 6 
+O 8 9 
 10
-X O X 
-O 5 6 
+1 X 3 
+O X 6 
 O X 9 
 10
-X O X 
-O 5 X 
-O X O 
-10
-X O X 
-O O 6 
-X 8 9 
-10
-X O X 
-O O O 
-X X 9 
-8
-X 2 3 
-O 5 6 
-X O 9 
-8
-X X O 
-O 5 6 
-X O 9 
-8
-X X O 
-O X 6 
-X O O 
-8
-X O X 
-4 O 6 
+1 O 3 
+X 5 6 
 7 8 9 
-8
-X O X 
-4 O 6 
-X O 9 
-8
-X 2 3 
-4 5 6 
-7 8 O 
-8
-X X 3 
-4 5 6 
-7 O O 
-9
-X 2 3 
-O O 6 
+10
+1 O 3 
+X X 6 
+7 8 9 
+10
+O O 3 
+X X 6 
+7 8 9 
+10
+O O 3 
+X X 6 
 7 X 9 
-9
-X 2 3 
-O O 6 
-O X X 
 10
-X 2 3 
-4 O 6 
-7 X O 
+O O O 
+X X 6 
+7 X 9 
 10
-X 2 O 
-4 O X 
-7 X O 
+1 2 3 
+X O 6 
+7 8 9 
 10
-X 2 O 
-O O X 
-X X O 
+1 X 3 
+X O 6 
+7 8 9 
+10
+1 X 3 
+X O 6 
+O 8 9 
+10
+1 X 3 
+X O X 
+O 8 9 
+10
+O X 3 
+X O X 
+O 8 9 
+10
+O X 3 
+X O X 
+O X 9 
+10
+O X 3 
+X O X 
+O X O 
