@@ -104,6 +104,7 @@ class View extends EventDispatcher
                 {
                     mod.newField();
                     mod.writeField();
+                    setCPtrue();
                     for (i = 0; i < 9; i++)
                     {
                         keys[i].setEnabled(true);
@@ -145,6 +146,7 @@ class View extends EventDispatcher
                     mod = new Model(text);
                     newModel();
                     mod.newcheck();
+                    setCPtrue();
                     try
                     {
                         mod.newField();

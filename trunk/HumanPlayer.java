@@ -38,6 +38,9 @@ class HumanPlayer implements IPlayer
         result = false;
         w.addListeners(this.getSign());        
     }
+    
+    public void setReadyToHod(boolean value)
+    {}        
 
     public boolean notifyIP()
     {

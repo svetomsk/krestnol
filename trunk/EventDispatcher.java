@@ -47,6 +47,14 @@ public class EventDispatcher
             listener.listen(s, x, y);
         }
     }
+    
+    public void setCPtrue()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.setCPtrue();
+        }
+    }
 
     public void goOne()
     {

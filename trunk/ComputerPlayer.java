@@ -14,7 +14,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
     private Model m;
     private View w;
     private String name1, name2;
-    private boolean value;
+    private boolean value, isReadyToHod = true;
     private GetText txt;
     ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, String s2, GetText txt, String sign, String sign1)
     {
@@ -28,6 +28,11 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
         this.cm = cm;
         name1 = s1;
         name2 = s2;
+    }
+    
+    public void setReadyToHod(boolean value)
+    {
+        isReadyToHod = value;
     }
 
     public void setSign(String value){}
@@ -46,128 +51,121 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
 
     public void hod()
     {
-        boolean temp1 = false;
-        try {
-            System.out.println(m.isAll());
-        } catch (IOException ex) {
-            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        w.delListeners();
-        boolean end = false;
-        try {
-            if (m.isAll() == true) {
-                end = true;
-                try {
-                    w.endWindow("Drawn");
-                    temp1= true;
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(end == false && temp1 == false)
-        {
-            boolean temp = false;
-            Random r = new Random();
-            int x = 0;
-            int y = 0;
-            try {
-                m.readField();
-            } catch (IOException ex) {
-                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while(m.getF(x, y) == false)
+        if(isReadyToHod == true)
+        {   
+            boolean temp1 = false;
+            w.delListeners();
+            boolean end = false;
+            try 
             {
-                x = 0 + r.nextInt(3);
-                y = 0 + r.nextInt(3);
-            }
-            w.setButtonText(sign,x,y);
-            m.setField(x,y,sign);
-            try {
-                m.writeField();
-            } catch (IOException ex) {
-                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                m.writeField();
-            } catch (IOException ex) {
-                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(m.checkField() == true)
-            {
-                end = true;
-               /* if(this.getSign().equals(sign))
-                {*/
-                    try {
-                        w.delListeners();
-                        w.setResultText(sign);
-                        st.add(name1, name2);
-                        st.updateTo();
-                        st.updateFrom();
-                        cm.endWin("1");
-                        try {
-                            System.out.println("HERE 3");
-                            w.endWindow(txt.sign1()+ " win");
-                            temp1 = true;
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-               /* }else
-                {
-                    try {
-                        w.delListeners();
-                        w.setResultText(name1);
-                        st.add(name1, name2);
-                        st.updateTo();
-                        st.updateFrom();
-                        cm.endWin("2");
-                        try {
-                            w.endWindow("O win");
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }*/
-            }
-            try {
-                if (m.isAll() == true && temp1 == false)
-                {
-                    try
-                    {
-                        w.endWindow("Drawn");
-                    } catch (InterruptedException ex)
-                    {
-                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    temp1 = true;
+                if (m.isAll() == true) {
                     end = true;
+                    try {
+                        w.endWindow("Drawn");
+                        temp1= true;
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(end == false && temp1 == false)
             {
-                if(sign.equals("X"))
+                boolean temp = false;
+                Random r = new Random();
+                int x = 0;
+                int y = 0;
+                try {
+                    m.readField();
+                } catch (IOException ex) {
+                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                while(m.getF(x, y) == false)
                 {
-                    w.goTwo();
-                }else
+                    x = 0 + r.nextInt(3);
+                    y = 0 + r.nextInt(3);
+                }
+                w.setButtonText(sign,x,y);
+                m.setField(x,y,sign);
+                try {
+                    m.writeField();
+                } catch (IOException ex) {
+                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    m.writeField();
+                } catch (IOException ex) {
+                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(m.checkField() == true)
                 {
-                    w.goOne();
+                    end = true;
+                   /* if(this.getSign().equals(sign))
+                    {*/
+                        try {
+                            w.delListeners();
+                            w.setResultText(sign);
+                            st.add(name1, name2);
+                            st.updateTo();
+                            st.updateFrom();
+                            cm.endWin("1");
+                            try {
+                                w.endWindow(txt.sign1()+ " win");
+                                temp1 = true;
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                   /* }else
+                    {
+                        try {
+                            w.delListeners();
+                            w.setResultText(name1);
+                            st.add(name1, name2);
+                            st.updateTo();
+                            st.updateFrom();
+                            cm.endWin("2");
+                            try {
+                                w.endWindow("O win");
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }*/
+                }
+                try {
+                    if (m.isAll() == true && temp1 == false)
+                    {
+                        try
+                        {
+                            w.endWindow("Drawn");
+                        } catch (InterruptedException ex)
+                        {
+                            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        temp1 = true;
+                        end = true;
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(end == false && temp1 == false)
+                {
+                    if(sign.equals("X"))
+                    {
+                        w.goTwo();
+                    }else
+                    {
+                        w.goOne();
+                    }
                 }
             }
-        }
-        try {
-            System.out.println(m.isAll());
-        } catch (IOException ex) {
-            Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }
 
     public boolean notifyIP()

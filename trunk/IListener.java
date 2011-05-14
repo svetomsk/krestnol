@@ -9,4 +9,5 @@ public interface IListener
     public void trueOne();
     public void game();
     public void newGame();
+    public void setCPtrue();
 }

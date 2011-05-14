@@ -63,9 +63,11 @@ class Kontroler implements IListener
                         st.add(pl1.getName(), pl3.getName());
                         st.updateTo();
                         st.updateFrom();
-                        try {
-                            System.out.println("HERE 1");
-                            w.endWindow(text.sign2() +  " win");
+                        try 
+                        {
+                            System.out.println("X win");
+                            w.endWindow(text.sign1() +  " win");
+                            pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -76,9 +78,11 @@ class Kontroler implements IListener
                         st.add(pl3.getName(), pl1.getName());
                         st.updateTo();
                         st.updateFrom();
-                        try {
-                            System.out.println("HERE 2");
-                            w.endWindow(text.sign1() + " win");
+                        try 
+                        {
+                            System.out.println("Q win");
+                            w.endWindow(text.sign2() + " win");
+                            pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -103,6 +107,11 @@ class Kontroler implements IListener
         } catch (IOException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void setCPtrue()
+    {
+        pl1.setReadyToHod(true);
     }
 
     public void game()
