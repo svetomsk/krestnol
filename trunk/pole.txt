@@ -1,3 +1,0 @@
-O X 3 
-X O X 
-O X O 

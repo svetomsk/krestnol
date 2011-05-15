@@ -17,11 +17,11 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
     private String name1, name2;
     private boolean value, isReadyToHod = true;
     private GetText txt;
-    ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, String s2, GetText txt, String sign, String sign1)
+    ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, String s2, GetText txt)
     {
         this.txt = txt;
-        this.sign = sign;
-        this.sign1 = sign1;
+        this.sign = txt.getSign1();
+        this.sign1 = txt.getSign2();
         name = "Computer";
         this.m = m;
         this.w = w;
@@ -157,17 +157,17 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                 if(m.checkField() == true)
                 {
                     end = true;
-                   /* if(this.getSign().equals(sign))
-                    {*/
+                    if(sign.equals(txt.getSign1()))
+                    {
                         try {
                             w.delListeners();
-                            w.setResultText(sign);
+                           // w.setResultText(sign);
                             st.add(name1, name2);
                             st.updateTo();
                             st.updateFrom();
                             cm.endWin("1");
                             try {
-                                w.endWindow(txt.sign1()+ " win");
+                                w.endWindow(txt.getSign1()+ " win");
                                 temp1 = true;
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,11 +175,11 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                         } catch (IOException ex) {
                             Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                   /* }else
+                    }else
                     {
                         try {
                             w.delListeners();
-                            w.setResultText(name1);
+                           // w.setResultText(name1);
                             st.add(name1, name2);
                             st.updateTo();
                             st.updateFrom();
@@ -192,7 +192,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                         } catch (IOException ex) {
                             Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }*/
+                    }
                 }
                 try {
                     if (m.isAll() == true && temp1 == false)

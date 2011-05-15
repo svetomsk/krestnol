@@ -1,87 +1,62 @@
 package krestnol;
 import java.io.*;
+import java.util.ResourceBundle;
 class GetText
 {
-    private BufferedReader bufR;
-    private int kol = 14;
-    private String [] value = new String[kol];
+    private ResourceBundle bundle;
 
     GetText()throws IOException
     {
-       bufR = new BufferedReader(new FileReader("src/krestnol/text.txt"));
-       for(int i = 0; i < kol; i++)
-       {
-           value[i] = bufR.readLine();
-       }
+        bundle = ResourceBundle.getBundle("krestnol.krestnol");      
     }
 
-    public String name1()
+    public String getSign1()
     {
-        return value[0];
+        return bundle.getString("krestnol.sign1");
     }
 
-    public String sign1()
+    public String getSign2()
     {
-        return value[1];
+        return bundle.getString("krestnol.sign2");
     }
 
-    public String name2()
+    public String getFrameName()
     {
-        return value[2];
+        return bundle.getString("krestnol.frameName");
     }
 
-    public String sign2()
+    public String getGameOver()
     {
-        return value[3];
+        return bundle.getString("krestnol.gameOver");
     }
 
-    public String frameName()
+    public String getDrawn()
     {
-        return value[4];
+        return bundle.getString("krestnol.drawn");
     }
 
-    public String fail()
+    public String getXwin()
     {
-        return value[5];
+        return bundle.getString("krestnol.wWin");
     }
 
-    public String igra()
+    public String getOwin()
     {
-        return value[6];
+        return bundle.getString("krestnol.oWin");
     }
 
-    public String spravke()
+    public String getStat()
     {
-        return value[7];
+        return bundle.getString("krestnol.stat");
     }
 
-    public String vyxod()
+    public String getNew()
     {
-        return value[8];
+        return bundle.getString("krestnol.new");
     }
 
-    public String novaya()
+    public String getExit()
     {
-        return value[9];
-    }
-
-    public String obigre()
-    {
-        return value[10];
-    }
-
-    public String anyone()
-    {
-        return value[11];
-    }
-
-    public String html()
-    {
-        return value[12];
-    }
-
-    public String win()
-    {
-        return value[13];
+        return bundle.getString("krestnol.exit");
     }
 }
