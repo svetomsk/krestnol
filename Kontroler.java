@@ -25,11 +25,11 @@ class Kontroler implements IListener
             m = new Model(text);
             w = new View(m, text, st, cm);
             w.addEventListener(this);
-            pl1 = new HumanPlayer(w) /*new ComputerPlayer(m,w,st,cm, "First","Second",text,"X","O")*/;
-            pl3 = new HumanPlayer(w) /*new ComputerPlayer(m,w,st,cm, "Second","First",text,"O","X")*/;
-            w.getNames(pl1, pl3);
-            pl1.setSign(text.sign1());
-            pl3.setSign(text.sign2());
+            pl1 =/* new HumanPlayer(w)*/ new ComputerPlayer(m,w,st,cm, "First","Second",text);
+            pl2 = new HumanPlayer(w) /*new ComputerPlayer(m,w,st,cm, "Second","First",text)*/;
+            w.getNames(pl1, pl2);
+            pl1.setSign(text.getSign1());
+            pl2.setSign(text.getSign2());
             w.show();
         } catch (IOException ex)
         {
@@ -56,16 +56,16 @@ class Kontroler implements IListener
                 cm.nowPos(m.getField(),s);
                 if(m.checkField() == true)
                 {
-                    if(s.equals(text.sign1()))
+                    if(s.equals(text.getSign1()))
                     {
                         w.delListeners();
-                        w.setResultText(pl1.getName());
-                        st.add(pl1.getName(), pl3.getName());
+                       // w.setResultText(pl1.getName());
+                        st.add(pl1.getName(), pl2.getName());
                         st.updateTo();
                         st.updateFrom();
                         try 
                         {
-                            w.endWindow(text.sign1() +  " win");
+                            w.endWindow(text.getSign1() +  " win");
                             pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,13 +73,13 @@ class Kontroler implements IListener
                     }else
                     {
                         w.delListeners();
-                        w.setResultText(pl3.getName());
-                        st.add(pl3.getName(), pl1.getName());
+                      //  w.setResultText(pl3.getName());
+                        st.add(pl2.getName(), pl1.getName());
                         st.updateTo();
                         st.updateFrom();
                         try 
                         {
-                            w.endWindow(text.sign2() + " win");
+                            w.endWindow(text.getSign2() + " win");
                             pl1.setReadyToHod(false);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,7 +124,7 @@ class Kontroler implements IListener
 
     public void goTwo()
     {
-        pl3.hod();
+        pl2.hod();
     }
 
     public void trueOne()

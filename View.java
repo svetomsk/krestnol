@@ -89,7 +89,7 @@ class View extends EventDispatcher
 
     private void addNewGame()
     {
-        newGame = new JButton(text.novaya());
+        newGame = new JButton(text.getNew());
         newGame.setPreferredSize(new Dimension(77,20));
         Border border = BorderFactory.createLineBorder(Color.decode("#90C0FF"), 2);
         newGame.setBorder(border);
@@ -111,14 +111,14 @@ class View extends EventDispatcher
                         keys[i].setText(" ");
                     }
 
-                    result.setText(text.anyone());
+                    result.setText(text.getDrawn());
                 } catch (IOException ex)
                 {
                     Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 for(i = 0; i < width*height; i++)
                 {
-                    addButton(keys[i],"X");
+                    addButton(keys[i],text.getSign1());
                 }
                 newGame();
             }
@@ -127,69 +127,65 @@ class View extends EventDispatcher
 
     public void endWindow(String value) throws InterruptedException
     {
-      /*  if(isFirst == true)
-        {*/
-            JLabel nd = new JLabel("Game over. Try again?");
-            nd.setLayout(new GridLayout());
-            nd.setPreferredSize(new Dimension(130,20));
-            isFirst = false;
-            pole.setVisible(false);
-            final Window endW = new Window();
-            endW.setTitle(value);
-            endW.setSize(200,100);
-            endW.setLayout(new FlowLayout());
-            JButton yes = new JButton("YES");
-            JButton no = new JButton("NO");
-            yes.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent ae)
+        JLabel nd = new JLabel(text.getGameOver());
+        nd.setLayout(new GridLayout());
+        nd.setPreferredSize(new Dimension(130,20));
+        isFirst = false;
+        pole.setVisible(false);
+        final Window endW = new Window();
+        endW.setTitle(value);
+        endW.setSize(200,100);
+        endW.setLayout(new FlowLayout());
+        JButton yes = new JButton("YES");
+        JButton no = new JButton("NO");
+        yes.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae)
+            {
+                mod = new Model(text);
+                newModel();
+                mod.newcheck();
+                setCPtrue();
+                try
                 {
-                    mod = new Model(text);
-                    newModel();
-                    mod.newcheck();
-                    setCPtrue();
-                    try
+                    mod.newField();
+                    mod.writeField();
+                    for (i = 0; i < 9; i++)
                     {
-                        mod.newField();
-                        mod.writeField();
-                        for (i = 0; i < 9; i++)
-                        {
-                            keys[i].setEnabled(true);
-                            keys[i].setText(" ");
-                        }
+                        keys[i].setEnabled(true);
+                        keys[i].setText(" ");
+                    }
 
-                        result.setText(text.anyone());
-                    } catch (IOException ex)
-                    {
-                        Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    for(i = 0; i < width*height; i++)
-                    {
-                        addButton(keys[i],"X");
-                    }
-                    newGame();
-                    pole.setVisible(true);
-                    endW.setVisible(false);
-                }
-            });
-            no.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent ae)
+                    result.setText(text.getDrawn());
+                } catch (IOException ex)
                 {
-                    try
-                    {
-                        cama.upTo();
-                    }catch (IOException exs)
-                    {
-                        System.out.println("Line 182");
-                    }
-                    System.exit(0);
+                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });
-            endW.add(nd);
-            endW.add(yes);
-            endW.add(no);
-            endW.setVisible(true);
-       /* }  */
-        
+                for(i = 0; i < width*height; i++)
+                {
+                    addButton(keys[i],text.getSign1());
+                }
+                newGame();
+                pole.setVisible(true);
+                endW.setVisible(false);
+            }
+        });
+        no.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae)
+            {
+                try
+                {
+                    cama.upTo();
+                }catch (IOException exs)
+                {
+                    System.out.println("Line 182");
+                }
+                System.exit(0);
+            }
+        });
+        endW.add(nd);
+        endW.add(yes);
+        endW.add(no);
+        endW.setVisible(true);    
     }
 
     private void addStat()
@@ -223,7 +219,7 @@ class View extends EventDispatcher
     private void addExit()
     {
         Border bord = BorderFactory.createLineBorder(Color.decode("#90C0FF"), 2);
-        exit = new JButton(text.vyxod());
+        exit = new JButton(text.getExit());
         exit.setBorder(bord);
         exit.setBackground(Color.decode("#20B0FF"));
         exit.setPreferredSize(new Dimension(77,20));
@@ -298,7 +294,7 @@ class View extends EventDispatcher
         }
         if(result.getText().equals(" "))
         {
-            result.setText(text.anyone());
+            result.setText(text.getDrawn());
         }
         for(i=0;i<9;i++)
         {
@@ -311,10 +307,10 @@ class View extends EventDispatcher
         pole.setVisible(true);
     }
 
-    public void setResultText(String ResultText)
+    /*public void setResultText(String ResultText)
     {
         result.setText(ResultText + " " + text.win());
-    }
+    }*/
 
     public void setButtonText(String ButtonText, int x, int y)
     {
@@ -335,7 +331,7 @@ class View extends EventDispatcher
                     for(int g = 0; g < al.length; g++)
                         keys[i].removeActionListener(al[g]);
                 }
-                if(st.equals(text.sign1()))
+                if(st.equals(text.getSign1()))
                 {
                     goTwo();
                 }else

@@ -8,6 +8,8 @@ class Model
     private String [][] field = new String[fieldX][fieldY];
     private String [] checkF = new String[fieldX*fieldY];
     private GetText text;
+    public static final String X = "X";
+    public static final String O = "O";
     
     public Model(GetText txt)
     {
@@ -50,7 +52,7 @@ class Model
             {
                 for(int g = 0; g < fieldY; g++)
                 {
-                    if(!field[i][g].equals(text.sign1()) && !field[i][g].equals(text.sign2()))
+                    if(!field[i][g].equals(text.getSign1()) && !field[i][g].equals(text.getSign2()))
                     {
                         result = false;
                         temp = true;
@@ -70,7 +72,7 @@ class Model
     public boolean getF(int x, int y)
     {
         boolean result = true;
-        if(field[x][y].equals(text.sign1())||field[x][y].equals(text.sign2()))
+        if(field[x][y].equals(text.getSign1())||field[x][y].equals(text.getSign2()))
         {
             result = false;
         }
