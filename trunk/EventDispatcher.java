@@ -39,6 +39,30 @@ public class EventDispatcher
             listener.newModel();
         }
     }
+    
+    public void setPlayerName(String s1, String s2)
+    {
+        for(IListener listener : listeners)
+        {
+            listener.setPlayerName(s1,s2);
+        }
+    }
+    
+    public void ComputerVsPlayer()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.ComputerVsPlayer();
+        }
+    }
+    
+    public void PlayerVsPlayer()
+    {
+        for(IListener listener : listeners)
+        {
+            listener.PlayerVsPlayer();
+        }
+    }
 
     public void dispatchEvent(String s, int x, int y)
     {
@@ -48,11 +72,11 @@ public class EventDispatcher
         }
     }
     
-    public void setCPtrue()
+    public void setTrue(String s)
     {
         for(IListener listener : listeners)
         {
-            listener.setCPtrue();
+            listener.setTrue(s);
         }
     }
 
