@@ -6,7 +6,6 @@ public interface IListener
     public void newModel();
     public void goOne();
     public void goTwo();
-    public void trueOne();
     public void game();
     public void newGame();
     public void setTrue(String s);

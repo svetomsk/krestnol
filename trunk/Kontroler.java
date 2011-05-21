@@ -13,7 +13,7 @@ class Kontroler implements IListener
     private Stat st;
     private IPlayer pl1;
     private IPlayer pl2;
-    private IPlayer pl3;
+    boolean temp;
     Kontroler() throws InterruptedException
     {
         try
@@ -25,8 +25,6 @@ class Kontroler implements IListener
             m = new Model(text);
             w = new View(m, text, st, cm);
             w.addEventListener(this);
-           /* pl1 = /*new HumanPlayer(w)new ComputerPlayer(m,w,st,cm, "First","Second",text);
-            pl2 = new HumanPlayer(w);*/
             w.getNames();
             pl1.setSign(text.getSign1());
             pl2.setSign(text.getSign2());
@@ -44,7 +42,7 @@ class Kontroler implements IListener
 
     public void listen(String s,int x, int y)
     {
-        boolean temp = false;
+        temp = false;
         try
         {
             m.readField();
@@ -55,39 +53,7 @@ class Kontroler implements IListener
                 m.writeField();
                 cm.add(m.getField());
                 cm.nowPos(m.getField(),s);
-                if(m.checkField() == true)
-                {
-                    temp = true;
-                    if(s.equals(text.getSign1()))
-                    {
-                        w.delListeners();
-                       // w.setResultText(pl1.getName());
-                        st.add(pl1.getName(), pl2.getName());
-                        st.updateTo();
-                        st.updateFrom();
-                        try 
-                        {
-                            w.endWindow(text.getSign1() +  " win");
-                            pl2.setReadyToHod(false);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }else
-                    {
-                        w.delListeners();
-                      //  w.setResultText(pl3.getName());
-                        st.add(pl2.getName(), pl1.getName());
-                        st.updateTo();
-                        st.updateFrom();
-                        try 
-                        {
-                            w.endWindow(text.getSign2() + " win");
-                            pl1.setReadyToHod(false);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
+                inListen(s);
             }
         } catch (IOException ex)
         {
@@ -108,6 +74,41 @@ class Kontroler implements IListener
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void inListen(String s) throws IOException
+    {
+        if(m.checkField() == true)
+        {
+            temp = true;
+            if(s.equals(text.getSign1()))
+            {
+                w.delListeners();
+                st.add(pl1.getName(), pl2.getName());
+                st.updateTo();
+                st.updateFrom();
+                try 
+                {
+                    w.endWindow(text.getSign1() +  " win");
+                    pl2.setReadyToHod(false);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else
+            {
+                w.delListeners();
+                st.add(pl2.getName(), pl1.getName());
+                st.updateTo();
+                st.updateFrom();
+                try 
+                {
+                    w.endWindow(text.getSign2() + " win");
+                    pl1.setReadyToHod(false);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -139,12 +140,6 @@ class Kontroler implements IListener
         pl2.hod();
     }
 
-    public void trueOne()
-    {
-        pl1.setTrue();
-        w.delListeners();
-    }
-
     public void newGame()
     {
         w.delListeners();
@@ -163,6 +158,7 @@ class Kontroler implements IListener
         pl1 = new ComputerPlayer(m,w,st,cm,pl2.getName(),text);
         pl1.setName("Computer");
     }
+    
     public void setPlayerName(String s1, String s2)
     {
         if(s1.equals("1"))

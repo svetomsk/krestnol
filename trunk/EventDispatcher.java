@@ -47,7 +47,7 @@ public class EventDispatcher
             listener.setPlayerName(s1,s2);
         }
     }
-    
+        
     public void ComputerVsPlayer()
     {
         for(IListener listener : listeners)
@@ -93,14 +93,6 @@ public class EventDispatcher
         for(IListener listener : listeners)
         {
             listener.goTwo();
-        }
-    }
-
-    public void trueOne()
-    {
-        for(IListener listner : listeners)
-        {
-            listner.trueOne();
         }
     }
 }
