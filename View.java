@@ -11,10 +11,10 @@ class View extends EventDispatcher
     private GetText text;
     private Model mod;
     private Cama cama;
-    private Window pole, ask, statistica;
-    private JRadioButton wcomp, bcomp, ocomp;
+    private Window pole, ask, statistica, endW;
+    private JRadioButton wcomp, bcomp;
     private ButtonGroup bg;
-    private JLabel result, hum1, hum2;
+    private JLabel hum1, hum2;
     private JTextField pl1, pl2;
     private JButton key1, key2, key3, key4, key5, key6, key7, key8, key9, OK, newGame, exit, stat;
     private JButton[] keys={key1, key2, key3, key4, key5, key6, key7, key8, key9};
@@ -24,7 +24,6 @@ class View extends EventDispatcher
     private int height = 3;
     private int length = width*height;
     private boolean ready = false;
-    private boolean isFirst = true;
 
     public View(final Model model, final GetText txt, final Stat st, Cama cm)throws IOException, InterruptedException
     {
@@ -32,57 +31,43 @@ class View extends EventDispatcher
         s1 = st;
         mod = model;
         cama = cm;
-        createLabel();
         createFrame();
         addNewGame();
         addStat();
         addExit();
-        //createRB();
+        createRB();
     }
 
     private void createRB()
-    {
+    {        
         wcomp = new JRadioButton("Один игрок");
-        bcomp = new JRadioButton("Два игрока",true);
-        ocomp = new JRadioButton("Комп vs. комп");
+        bcomp = new JRadioButton("Два игрока");
         wcomp.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent t)
             {
                pl1.setEnabled(true);
                pl2.setEnabled(false);
+               ComputerVsPlayer();
            }
-        });
-        ocomp.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent t)
-            {
-                pl1.setEnabled(false);
-                pl2.setEnabled(false);
-            }
         });
         bcomp.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
             {
                 pl1.setEnabled(true);
                 pl2.setEnabled(true);
+                PlayerVsPlayer();
             }
         });
         bg = new ButtonGroup();
         bg.add(wcomp);
         bg.add(bcomp);
-        bg.add(ocomp);
-    }
-
-    private void createLabel()
-    {
-        result=new JLabel(" ");
-        result.setPreferredSize(new Dimension(150,20));
     }
 
     private void createFrame()
     {
         pole=new Window();
         pole.setLayout(new FlowLayout());
-        pole.setSize(new Dimension(200,400));
+        pole.setSize(new Dimension(200,270));
         pole.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pole.setResizable(false);
     }
@@ -104,14 +89,13 @@ class View extends EventDispatcher
                 {
                     mod.newField();
                     mod.writeField();
-                    setCPtrue();
+                    setTrue("1");
+                    setTrue("2");
                     for (i = 0; i < 9; i++)
                     {
                         keys[i].setEnabled(true);
                         keys[i].setText(" ");
                     }
-
-                    result.setText(text.getDrawn());
                 } catch (IOException ex)
                 {
                     Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,10 +114,10 @@ class View extends EventDispatcher
         JLabel nd = new JLabel(text.getGameOver());
         nd.setLayout(new GridLayout());
         nd.setPreferredSize(new Dimension(130,20));
-        isFirst = false;
         pole.setVisible(false);
-        final Window endW = new Window();
+        endW = new Window();
         endW.setTitle(value);
+        endW.setResizable(false);
         endW.setSize(200,100);
         endW.setLayout(new FlowLayout());
         JButton yes = new JButton("YES");
@@ -144,7 +128,8 @@ class View extends EventDispatcher
                 mod = new Model(text);
                 newModel();
                 mod.newcheck();
-                setCPtrue();
+                setTrue("1");
+                setTrue("2");
                 try
                 {
                     mod.newField();
@@ -154,8 +139,6 @@ class View extends EventDispatcher
                         keys[i].setEnabled(true);
                         keys[i].setText(" ");
                     }
-
-                    result.setText(text.getDrawn());
                 } catch (IOException ex)
                 {
                     Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,13 +221,13 @@ class View extends EventDispatcher
         });
     }
 
-    synchronized void getNames(final IPlayer p1, final IPlayer p2)
-    {
+    synchronized void getNames()
+    {           
         ready = false;
         ask = new Window();
         ask.setLayout(new FlowLayout());
         ask.setResizable(false);
-        ask.setSize(new Dimension(200,250));
+        ask.setSize(new Dimension(200,200));
         ask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hum1 = new JLabel("1st name: ");
         hum2 = new JLabel("2nd name: ");
@@ -255,10 +238,17 @@ class View extends EventDispatcher
         OK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
             {
-                if(!pl1.getText().equals("")&&!pl1.getText().equals(""))
+                if(pl2.isEnabled() == false)
                 {
-                    p1.setName(pl1.getText());
-                    p2.setName(pl2.getText());
+                    if(!pl1.getText().equals(""))
+                    {
+                        setPlayerName("1",pl1.getText());
+                        ask.setVisible(false);
+                    }
+                }else if(!pl1.getText().equals("")&&!pl1.getText().equals(""))
+                {
+                    setPlayerName("1",pl1.getText());
+                    setPlayerName("2",pl2.getText());
                     ask.setVisible(false);
                 }
             }
@@ -268,9 +258,8 @@ class View extends EventDispatcher
         ask.add(hum2);
         ask.add(pl2);
         ask.add(OK);
-        //ask.add(wcomp);
-       // ask.add(bcomp);
-        //ask.add(ocomp);
+        ask.add(wcomp);
+        ask.add(bcomp);     
         ask.setVisible(true);
         while(ask.isVisible() == true)
         {
@@ -292,10 +281,6 @@ class View extends EventDispatcher
             keys[i].setPreferredSize(new Dimension(50,50));
             keys[i].setBackground(Color.BLUE);
         }
-        if(result.getText().equals(" "))
-        {
-            result.setText(text.getDrawn());
-        }
         for(i=0;i<9;i++)
         {
             pole.add(keys[i]);
@@ -303,7 +288,6 @@ class View extends EventDispatcher
         pole.add(newGame);
         pole.add(exit);
         pole.add(stat);
-        pole.add(result);
         pole.setVisible(true);
     }
 

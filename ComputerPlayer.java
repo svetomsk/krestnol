@@ -7,9 +7,8 @@ import java.util.logging.Logger;
 
 class ComputerPlayer extends EventDispatcher implements IPlayer
 {
-    private String sign, sign1;
+    private String sign;
     private int width = 3, height = 3;
-    private String name;
     private Stat st;
     private Cama cm;
     private Model m;
@@ -17,18 +16,15 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
     private String name1, name2;
     private boolean value, isReadyToHod = true;
     private GetText txt;
-    ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, String s2, GetText txt)
+    ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, GetText txt)
     {
         this.txt = txt;
         this.sign = txt.getSign1();
-        this.sign1 = txt.getSign2();
-        name = "Computer";
         this.m = m;
         this.w = w;
         this.st = st;
         this.cm = cm;
-        name1 = s1;
-        name2 = s2;
+        name2 = s1;
     }
     
     public void setReadyToHod(boolean value)
@@ -38,7 +34,10 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
 
     public void setSign(String value){}
 
-    public void setName(String value){}
+    public void setName(String value)
+    {
+        name1 = value;
+    }
 
     public String getSign()
     {
@@ -47,7 +46,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
 
     public String getName()
     {
-        return name;
+        return name1;
     }
 
     public void hod()
@@ -128,32 +127,6 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                 } catch (IOException ex) {
                     Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               /* Random r = new Random();
-                int x = 0;
-                int y = 0;
-                try {
-                    m.readField();
-                } catch (IOException ex) {
-                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                while(m.getF(x, y) == false)
-                {
-                    x = 0 + r.nextInt(3);
-                    y = 0 + r.nextInt(3);
-                }
-                w.setButtonText(sign,x,y);                
-                m.setField(x,y,sign);
-                cm.add(m.getField());
-                try {
-                    m.writeField();
-                } catch (IOException ex) {
-                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    m.readField();
-                } catch (IOException ex) {
-                    Logger.getLogger(ComputerPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
                 if(m.checkField() == true)
                 {
                     end = true;

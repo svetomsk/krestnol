@@ -5,7 +5,7 @@ class HumanPlayer implements IPlayer
     private String sign;
     private String name;
     private View w;
-    private boolean result;
+    private boolean result, isReadyToHod = true;
 
     HumanPlayer(View w)
     {
@@ -35,12 +35,17 @@ class HumanPlayer implements IPlayer
 
     public void hod()
     {
-        result = false;
-        w.addListeners(this.getSign());        
+        if(isReadyToHod == true)
+        {
+            result = false;
+            w.addListeners(this.getSign());     
+        }
     }
     
     public void setReadyToHod(boolean value)
-    {}        
+    {    
+        isReadyToHod = value;
+    }        
 
     public boolean notifyIP()
     {

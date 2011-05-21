@@ -9,5 +9,8 @@ public interface IListener
     public void trueOne();
     public void game();
     public void newGame();
-    public void setCPtrue();
+    public void setTrue(String s);
+    public void PlayerVsPlayer();
+    public void ComputerVsPlayer();      
+    public void setPlayerName(String s1, String s2);
 }
