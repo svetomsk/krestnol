@@ -14,7 +14,7 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
     private Model m;
     private View w;
     private String name1, name2;
-    private boolean value, isReadyToHod = true;
+    private boolean isReadyToHod = true;
     private GetText txt;
     ComputerPlayer(Model m, View w, Stat st, Cama cm, String s1, GetText txt)
     {
@@ -134,7 +134,6 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                     {
                         try {
                             w.delListeners();
-                           // w.setResultText(sign);
                             st.add(name1, name2);
                             st.updateTo();
                             st.updateFrom();
@@ -152,7 +151,6 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
                     {
                         try {
                             w.delListeners();
-                           // w.setResultText(name1);
                             st.add(name1, name2);
                             st.updateTo();
                             st.updateFrom();
@@ -196,11 +194,4 @@ class ComputerPlayer extends EventDispatcher implements IPlayer
             }
         }        
     }
-
-    public boolean notifyIP()
-    {
-        return value;
-    }
-
-    public void setTrue(){};
 }

@@ -121,7 +121,29 @@ class View extends EventDispatcher
         endW.setSize(200,100);
         endW.setLayout(new FlowLayout());
         JButton yes = new JButton("YES");
-        JButton no = new JButton("NO");
+        JButton no = new JButton("NO");       
+        YesAction(yes);
+        no.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae)
+            {
+                try
+                {
+                    cama.upTo();
+                }catch (IOException exs)
+                {
+                    System.out.println("Line 182");
+                }
+                System.exit(0);
+            }
+        });
+        endW.add(nd);
+        endW.add(yes);
+        endW.add(no);
+        endW.setVisible(true);    
+    }
+    
+    public void YesAction(JButton yes)
+    {
         yes.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae)
             {
@@ -152,23 +174,6 @@ class View extends EventDispatcher
                 endW.setVisible(false);
             }
         });
-        no.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae)
-            {
-                try
-                {
-                    cama.upTo();
-                }catch (IOException exs)
-                {
-                    System.out.println("Line 182");
-                }
-                System.exit(0);
-            }
-        });
-        endW.add(nd);
-        endW.add(yes);
-        endW.add(no);
-        endW.setVisible(true);    
     }
 
     private void addStat()
@@ -291,11 +296,6 @@ class View extends EventDispatcher
         pole.setVisible(true);
     }
 
-    /*public void setResultText(String ResultText)
-    {
-        result.setText(ResultText + " " + text.win());
-    }*/
-
     public void setButtonText(String ButtonText, int x, int y)
     {
         keys[x*width+y].setText(ButtonText);
@@ -326,6 +326,7 @@ class View extends EventDispatcher
         };
         jbt.addActionListener(al);
     }
+    
     private int[] getPos(final JButton btn)
     {
         int [] results = new int[2];
