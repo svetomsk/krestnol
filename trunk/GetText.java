@@ -37,7 +37,7 @@ class GetText
 
     public String getXwin()
     {
-        return bundle.getString("krestnol.wWin");
+        return bundle.getString("krestnol.xWin");
     }
 
     public String getOwin()
@@ -58,5 +58,45 @@ class GetText
     public String getExit()
     {
         return bundle.getString("krestnol.exit");
+    }
+
+    public String getCpName()
+    {
+        return bundle.getString("krestnol.getCpName");
+    }
+
+    public String alonePlayer()
+    {
+        return bundle.getString("krestnol.alonePlayer");
+    }
+
+    public String twoPlayers()
+    {
+        return bundle.getString("krestnol.twoPlayers");
+    }
+
+    public String getWinner()
+    {
+        return bundle.getString("krestnol.getWinner");
+    }
+
+    public String getLoser()
+    {
+        return bundle.getString("krestnol.getLoser");
+    }
+
+    public String getFirstName()
+    {
+        return bundle.getString("krestnol.getFirstName");
+    }
+
+    public String getSecondName()
+    {
+        return bundle.getString("krestnol.getSecondName");
+    }
+
+    public String getPlay()
+    {
+        return bundle.getString("krestnol.getPlay");
     }
 }

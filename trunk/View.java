@@ -40,8 +40,8 @@ class View extends EventDispatcher
 
     private void createRB()
     {        
-        wcomp = new JRadioButton("Один игрок");
-        bcomp = new JRadioButton("Два игрока");
+        wcomp = new JRadioButton(text.alonePlayer());
+        bcomp = new JRadioButton(text.twoPlayers());
         wcomp.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent t)
             {
@@ -178,7 +178,7 @@ class View extends EventDispatcher
 
     private void addStat()
     {
-        stat = new JButton("Statistica");
+        stat = new JButton(text.getStat());
         stat.setPreferredSize(new Dimension(80,20));
         Border border = BorderFactory.createLineBorder(Color.decode("#90C0FF"), 2);
         stat.setBorder(border);
@@ -193,7 +193,7 @@ class View extends EventDispatcher
 
     private void createTable(String [][] objects)
     {
-        String [] head = { "Winer","Loser" };
+        String [] head = {text.getWinner(),text.getLoser()};
         JTable table = new JTable(objects,head);
         table.setEnabled(false);
         JScrollPane scroll = new JScrollPane(table);
@@ -234,11 +234,11 @@ class View extends EventDispatcher
         ask.setResizable(false);
         ask.setSize(new Dimension(200,200));
         ask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        hum1 = new JLabel("1st name: ");
-        hum2 = new JLabel("2nd name: ");
+        hum1 = new JLabel(text.getFirstName()+ " ");
+        hum2 = new JLabel(text.getSecondName() + " ");
         pl1 = new JTextField(7);
         pl2 = new JTextField(7);
-        OK = new JButton("PLAY");
+        OK = new JButton(text.getPlay());
         OK.setPreferredSize(new Dimension(100,30));
         OK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent t)
