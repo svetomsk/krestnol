@@ -67,7 +67,7 @@ class Kontroler implements IListener
                 {
                     try
                     {
-                        w.endWindow("Drawn");
+                        w.endWindow(text.getDrawn());
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -91,7 +91,7 @@ class Kontroler implements IListener
                 st.updateFrom();
                 try 
                 {
-                    w.endWindow(text.getSign1() +  " win");
+                    w.endWindow(text.getXwin());
                     pl2.setReadyToHod(false);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,7 +104,7 @@ class Kontroler implements IListener
                 st.updateFrom();
                 try 
                 {
-                    w.endWindow(text.getSign2() + " win");
+                    w.endWindow(text.getOwin());
                     pl1.setReadyToHod(false);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +156,7 @@ class Kontroler implements IListener
     {        
         pl2 = new HumanPlayer(w);
         pl1 = new ComputerPlayer(m,w,st,cm,pl2.getName(),text);
-        pl1.setName("Computer");
+        pl1.setName(text.getCpName());
     }
     
     public void setPlayerName(String s1, String s2)
